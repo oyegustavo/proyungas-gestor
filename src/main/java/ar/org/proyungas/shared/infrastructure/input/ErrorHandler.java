@@ -20,8 +20,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import tools.jackson.databind.PropertyNamingStrategies;
-import tools.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 
 @Slf4j
 @ControllerAdvice(basePackages = "ar.org.proyungas")

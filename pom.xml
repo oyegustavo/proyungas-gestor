@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-parent</artifactId>
+	    <version>3.3.3</version> <!-- latest Boot 3.x -->
+	    <relativePath/>
 	</parent>
 	<groupId>ar.org.proyungas</groupId>
 	<artifactId>proyungas-gestor</artifactId>
@@ -39,8 +39,8 @@
 		    <artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -76,13 +76,28 @@
 			<artifactId>mapstruct</artifactId>
 			<version>1.5.4.Final</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.mapstruct</groupId>
+		    <artifactId>mapstruct-processor</artifactId>
+		    <version>1.5.4.Final</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>42.7.3</version> <!-- latest stable -->
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 	    <dependencies>
 	        <dependency>
 	            <groupId>org.springframework.cloud</groupId>
 	            <artifactId>spring-cloud-dependencies</artifactId>
-	            <version>2023.0.3</version> <!-- pick the latest compatible with Boot 4.1 -->
+	            <version>2023.0.3</version>
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>
@@ -119,6 +134,16 @@
 									<groupId>org.projectlombok</groupId>
 									<artifactId>lombok</artifactId>
 								</path>
+								<path>
+							        <groupId>org.mapstruct</groupId>
+							        <artifactId>mapstruct-processor</artifactId>
+							        <version>1.5.4.Final</version>
+							    </path>
+							    <path>
+							        <groupId>org.projectlombok</groupId>
+							        <artifactId>lombok</artifactId>
+							        <version>1.18.30</version>
+							    </path>
 							</annotationProcessorPaths>
 						</configuration>
 					</execution>

@@ -6,6 +6,8 @@ import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,16 +31,19 @@ public class ActionEntity {
     @Column(name = "numero_actuacion", length = 30, nullable = false)
     private String actionNumber;
 
-    @Column(name = "tipo_plan_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "tipo_plan_id", nullable = false)
     private PlanTypeEntity planType;
 
     @Column(name = "propietario_predio", length = 300, nullable = false)
     private String propertyOwner;
 
-    @Column(name = "solicitante_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "solicitante_id", nullable = false)
     private UserEntity applicant;
 
-    @Column(name = "cargado_por_id")
+    @ManyToOne
+    @JoinColumn(name = "cargado_por_id")
     private UserEntity uploadedBy;
 
     @Column(name = "estado_derivado", length = 20, nullable = false)

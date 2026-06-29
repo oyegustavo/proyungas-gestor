@@ -1,17 +1,19 @@
 package ar.org.proyungas.infrastructure.input.action.create;
 
-import ar.org.proyungas.application.action.create.PlanTypeCreateCommand;
-import ar.org.proyungas.application.action.create.UserCreateCommand;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Value
 public class ActionCreateRequest {
-    String actionNumber;
-    PlanTypeCreateCommand planType;
-    String propertyOwner;
-    UserCreateCommand applicant;
-    UserCreateCommand uploadedBy;
-    String derivativeStatus;
+    private String actionNumber;
+    private PlanTypeCreateRequest planType;
+    private String propertyOwner;
+    private String applicantId;
+    private String uploadedById;
+    private String derivativeStatus;
 }

@@ -17,11 +17,11 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 
 @Slf4j
@@ -71,6 +71,12 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handle(HttpRequestMethodNotSupportedException ex) {
         return buildResponseError(HttpStatus.METHOD_NOT_ALLOWED, ErrorCode.BAD_REQUEST_ERROR);
+    }
+    
+    @ExceptionHandler(PlanTypeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorResponse> handle(PlanTypeNotFoundException ex) {
+        return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.PLAN_TYPE_NOT_FOUND);
     }
 
     private ResponseEntity<ErrorResponse> buildResponseError(

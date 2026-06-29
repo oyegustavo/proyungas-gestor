@@ -1,4 +1,4 @@
-package ar.org.proyungas.application.action.create;
+package ar.org.proyungas.infrastructure.input.action.create;
 
 import java.util.UUID;
 
@@ -7,10 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PlanTypeCreateCommand {
+@AllArgsConstructor
+@Builder
+public class PlanTypeCreateRequest {
 	private UUID id;
 }

@@ -13,8 +13,8 @@ public class Action {
     String actionNumber;
     PlanType planType;
     String propertyOwner;
-    User applicant;
-    User uploadedBy;
+    String applicantId;
+    String uploadedById;
     String derivativeStatus;
     OffsetDateTime createdAt;
     OffsetDateTime updatedAt;

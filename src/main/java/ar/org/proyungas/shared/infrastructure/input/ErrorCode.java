@@ -8,7 +8,7 @@ public enum ErrorCode {
   REST_CLIENT_ERROR(103, "Unexpected rest client error", "REST_CLIENT_ERROR"),
   NOT_FOUND_ERROR(104, "Not Found Error", "NOT_FOUND_ERROR"),
   EXTERNAL_SERVICE_ERROR(105, "External service error", "EXTERNAL_SERVICE_ERROR"),
-  CASE_FILE_NOT_FOUND(106, "CaseFile Not Found Error", "CASE_FILE_NOT_FOUND_ERROR"),
+  PLAN_TYPE_NOT_FOUND(106, "Plan Type Not Found Error", "PLAN_TYPE_NOT_FOUND_ERROR"),
   CRIME_SCENE_NOT_FOUND(107, "Crime Scene Not Found Error", "CRIME_SCENE_NOT_FOUND_ERROR"),
   CRIME_TYPE_NOT_FOUND(108, "Crime Type Not Found Error", "CRIME_TYPE_NOT_FOUND_ERROR"),
   AUDIENCE_NOT_FOUND(109, "Audience Not Found Error", "AUDIENCE_NOT_FOUND_ERROR"),

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,6 +26,7 @@ import lombok.Setter;
 public class ActionEntity {
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
@@ -38,13 +40,11 @@ public class ActionEntity {
     @Column(name = "propietario_predio", length = 300, nullable = false)
     private String propertyOwner;
 
-    @ManyToOne
-    @JoinColumn(name = "solicitante_id", nullable = false)
-    private UserEntity applicant;
+    @Column(name = "solicitante_id", nullable = false)
+    private String applicantId;
 
-    @ManyToOne
-    @JoinColumn(name = "cargado_por_id")
-    private UserEntity uploadedBy;
+    @Column(name = "cargado_por_id")
+    private String uploadedById;
 
     @Column(name = "estado_derivado", length = 20, nullable = false)
     private String derivativeStatus;

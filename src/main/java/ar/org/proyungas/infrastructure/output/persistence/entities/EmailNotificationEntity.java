@@ -1,10 +1,14 @@
 package ar.org.proyungas.infrastructure.output.persistence.entities;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,6 +23,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "notificaciones_email")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -53,9 +58,10 @@ public class EmailNotificationEntity {
 	    @Column(name = "celery_task_id", length = 100)
 	    private String celeryTaskId;
 
+	    @CreatedDate
 	    @Column(name = "created_at", nullable = false)
-	    private OffsetDateTime createdAt;
+	    private LocalDateTime createdAt;
 
 	    @Column(name = "enviado_at")
-	    private OffsetDateTime sentAt;
+	    private LocalDateTime sentAt;
 }

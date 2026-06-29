@@ -1,6 +1,6 @@
 package ar.org.proyungas.domain.models;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -16,7 +16,7 @@ public class Action {
     String applicantId;
     String uploadedById;
     String derivativeStatus;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
-    OffsetDateTime deletedAt;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    LocalDateTime deletedAt;
 }

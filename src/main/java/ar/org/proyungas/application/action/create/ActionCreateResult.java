@@ -1,6 +1,6 @@
 package ar.org.proyungas.application.action.create;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import ar.org.proyungas.domain.models.PlanType;
@@ -17,7 +17,7 @@ public class ActionCreateResult {
     UserCreateResult applicant;
     UserCreateResult uploadedBy;
     String derivativeStatus;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
-    OffsetDateTime deletedAt;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    LocalDateTime deletedAt;
 }

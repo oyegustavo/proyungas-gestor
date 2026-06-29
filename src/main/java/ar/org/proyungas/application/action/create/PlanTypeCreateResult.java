@@ -1,7 +1,6 @@
 package ar.org.proyungas.application.action.create;
 
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -16,8 +15,8 @@ public class PlanTypeCreateResult {
     private String group;
     private String description;
     private Boolean enabled;
-    private LocalDate dateFrom;
-    private LocalDate dateTo;
-    private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

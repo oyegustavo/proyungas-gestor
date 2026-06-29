@@ -1,7 +1,6 @@
 package ar.org.proyungas.application.plantype.get.byid;
 
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -16,8 +15,8 @@ public class PlanTypeByIdFinderResult {
     String group;
     String description;
     Boolean enabled;
-    LocalDate dateFrom;
-    LocalDate dateTo;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
+    LocalDateTime dateFrom;
+    LocalDateTime dateTo;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 }

@@ -39,6 +39,8 @@ public class ActionSaveJpaPersistenceAdapter implements ActionSaveOutputPort{
         		actionEntity.setApplicantId(action.getApplicantId());
         		actionEntity.setPropertyOwner(action.getPropertyOwner());
         		actionEntity.setUploadedById(action.getUploadedById());
+        		actionEntity.setActionNumber(action.getActionNumber());
+        		actionEntity.setDerivativeStatus(action.getDerivativeStatus());
         	return actionPersistenceMapper.toDomain(actionRepository.save(actionEntity));
 
         } catch (DataIntegrityViolationException e) {

@@ -1,11 +1,15 @@
 package ar.org.proyungas.infrastructure.output.persistence.entities;
 
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,6 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tipo_plan")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -45,14 +50,16 @@ public class PlanTypeEntity {
     private Boolean enabled;
 
     @Column(name = "fecha_desde")
-    private LocalDate dateFrom;
+    private LocalDateTime dateFrom;
 
     @Column(name = "fecha_hasta")
-    private LocalDate dateTo;
+    private LocalDateTime dateTo;
 
+    @CreatedDate
     @Column(name = "created_at", nullable = false)
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 }

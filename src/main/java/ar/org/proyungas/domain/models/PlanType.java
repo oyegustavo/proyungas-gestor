@@ -9,14 +9,12 @@ import lombok.Value;
 @Builder
 @Value
 public class PlanType {
-    private UUID id;
-    private String code;
-    private String name;
-    private String group;
-    private String description;
-    private Boolean enabled;
-    private LocalDateTime dateFrom;
-    private LocalDateTime dateTo;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    UUID id;
+    String code;
+    String name;
+    String group;
+    String description;
+    Boolean enabled;
+    LocalDateTime dateFrom;
+    LocalDateTime dateTo;
 }

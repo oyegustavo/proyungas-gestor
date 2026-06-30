@@ -29,7 +29,7 @@ public class ActionSaveJpaPersistenceAdapter implements ActionSaveOutputPort{
 
 	@Override
 	public Action perform(Action action) {
-        log.info("Start performing ActionSaveJpaPersistenceAdapter with data: {}", action);
+        log.info("Starting perform ActionSaveJpaPersistenceAdapter with data: {}", action);
         try {
         	
         	if (!actionRepository.findByActionNumber(action.getActionNumber()).isEmpty()) {

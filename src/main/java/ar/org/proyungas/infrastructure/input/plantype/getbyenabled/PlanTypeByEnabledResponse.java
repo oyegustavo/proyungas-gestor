@@ -1,4 +1,4 @@
-package ar.org.proyungas.application.plantype.get.byid;
+package ar.org.proyungas.infrastructure.input.plantype.getbyenabled;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,7 +8,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class PlanTypeByIdFinderResult {
+public class PlanTypeByEnabledResponse {
     UUID id;
     String code;
     String name;

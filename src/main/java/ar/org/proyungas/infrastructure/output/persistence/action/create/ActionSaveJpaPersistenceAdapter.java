@@ -14,6 +14,7 @@ import ar.org.proyungas.shared.infrastructure.input.ActionBadRequestException;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.PlanTypeNotFoundException;
+import ar.org.proyungas.shared.infrastructure.input.RepeatedActionNumberException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,11 @@ public class ActionSaveJpaPersistenceAdapter implements ActionSaveOutputPort{
 	public Action perform(Action action) {
         log.info("Start performing ActionSaveJpaPersistenceAdapter with data: {}", action);
         try {
+        	
+        	if (!actionRepository.findByActionNumber(action.getActionNumber()).isEmpty()) {
+        		log.error("Action Number provided already exists!");
+				throw new RepeatedActionNumberException(ErrorCode.REPEATED_ACTION_NUMBER_ERROR);
+			}
         	
     		ActionEntity actionEntity = new ActionEntity();
         	PlanTypeEntity planType = planTypeRepository.findById(action.getPlanType().getId())

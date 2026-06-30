@@ -15,4 +15,7 @@ public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
 
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
     Optional<ActionEntity> findById(UUID id);
+    
+    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    Optional<ActionEntity> findByActionNumber(String actionNumber);
 }

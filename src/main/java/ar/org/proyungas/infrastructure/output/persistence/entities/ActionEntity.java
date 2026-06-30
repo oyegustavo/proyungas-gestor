@@ -1,8 +1,8 @@
 package ar.org.proyungas.infrastructure.output.persistence.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -73,13 +73,13 @@ public class ActionEntity {
     
     @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private List<ActionLayerEntity> layers = new ArrayList<>();
+    private Set<ActionLayerEntity> layers = new HashSet<>();
     
     @OneToMany(mappedBy = "actuacion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private List<EmailNotificationEntity> emailNotifications = new ArrayList<>();
+    private Set<EmailNotificationEntity> emailNotifications = new HashSet<>();
 
     @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private List<VectorialLayerEntity> vectorialLayers = new ArrayList<>();
+    private Set<VectorialLayerEntity> vectorialLayers = new HashSet<>();
 }

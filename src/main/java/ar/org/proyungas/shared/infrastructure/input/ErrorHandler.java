@@ -73,10 +73,22 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.METHOD_NOT_ALLOWED, ErrorCode.BAD_REQUEST_ERROR);
     }
     
+    @ExceptionHandler(RepeatedActionNumberException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(RepeatedActionNumberException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.REPEATED_ACTION_NUMBER_ERROR);
+    }
+    
     @ExceptionHandler(PlanTypeNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handle(PlanTypeNotFoundException ex) {
         return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.PLAN_TYPE_NOT_FOUND);
+    }
+    
+    @ExceptionHandler(ActionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorResponse> handle(ActionNotFoundException ex) {
+        return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.ACTION_NOT_FOUND);
     }
 
     private ResponseEntity<ErrorResponse> buildResponseError(

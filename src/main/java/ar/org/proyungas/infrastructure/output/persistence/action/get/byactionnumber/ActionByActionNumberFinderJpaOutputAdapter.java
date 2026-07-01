@@ -1,10 +1,10 @@
-package ar.org.proyungas.infrastructure.output.persistence.action.getby;
+package ar.org.proyungas.infrastructure.output.persistence.action.get.byactionnumber;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
-import ar.org.proyungas.domain.output.action.ActionByActionNumberFinderOutputPort;
+import ar.org.proyungas.domain.output.action.ActionByActionNumberOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.action.create.ActionPersistenceMapper;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 import ar.org.proyungas.infrastructure.output.persistence.repository.ActionRepository;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class ActionByActionNumberFinderJpaOutputAdapter implements ActionByActionNumberFinderOutputPort {
+public class ActionByActionNumberFinderJpaOutputAdapter implements ActionByActionNumberOutputPort {
 
 	private final ActionRepository repository;
 	private final ActionPersistenceMapper mapper;

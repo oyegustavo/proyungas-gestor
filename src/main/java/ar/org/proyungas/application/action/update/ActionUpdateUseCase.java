@@ -3,7 +3,7 @@ package ar.org.proyungas.application.action.update;
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
-import ar.org.proyungas.domain.output.action.ActionByActionNumberFinderOutputPort;
+import ar.org.proyungas.domain.output.action.ActionByActionNumberOutputPort;
 import ar.org.proyungas.domain.output.action.ActionSaveOutputPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ActionUpdateUseCase implements ActionUpdater{
 
     private final ActionSaveOutputPort actionSaveOutputPort;
-    private final ActionByActionNumberFinderOutputPort actionByActionNumberFinderOutputPort;
+    private final ActionByActionNumberOutputPort actionByActionNumberFinderOutputPort;
 	
 	@Override
 	public void perform(ActionUpdateCommand command, String actionNumber) {

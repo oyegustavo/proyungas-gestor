@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
-import ar.org.proyungas.domain.output.action.ActionSaveOutputPort;
+import ar.org.proyungas.domain.output.action.ActionCreateOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.PlanTypeEntity;
 import ar.org.proyungas.infrastructure.output.persistence.repository.ActionRepository;
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class ActionSaveJpaPersistenceAdapter implements ActionSaveOutputPort{
+public class ActionCreateJpaPersistenceAdapter implements ActionCreateOutputPort{
 	
     private final ActionPersistenceMapper actionPersistenceMapper;
     private final ActionRepository actionRepository;
@@ -29,7 +29,7 @@ public class ActionSaveJpaPersistenceAdapter implements ActionSaveOutputPort{
 
 	@Override
 	public Action perform(Action action) {
-        log.info("Starting perform ActionSaveJpaPersistenceAdapter with data: {}", action);
+        log.info("Starting perform ActionCreateJpaPersistenceAdapter with data: {}", action);
         try {
         	
         	if (!actionRepository.findByActionNumber(action.getActionNumber()).isEmpty()) {

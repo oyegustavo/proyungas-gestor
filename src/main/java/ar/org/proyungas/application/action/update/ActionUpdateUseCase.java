@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.output.action.ActionByActionNumberOutputPort;
-import ar.org.proyungas.domain.output.action.ActionSaveOutputPort;
+import ar.org.proyungas.domain.output.action.ActionUpdateOutputPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,14 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ActionUpdateUseCase implements ActionUpdater{
 
-    private final ActionSaveOutputPort actionSaveOutputPort;
+    private final ActionUpdateOutputPort actionUpdateOutputPort;
     private final ActionByActionNumberOutputPort actionByActionNumberFinderOutputPort;
 	
 	@Override
 	public void perform(ActionUpdateCommand command, String actionNumber) {
         log.info("Start performing ActionUpdateUseCase with data: {}", command);
         Action existingAction = actionByActionNumberFinderOutputPort.perform(actionNumber);
-        actionSaveOutputPort.perform(buildAction(command, existingAction));
+        actionUpdateOutputPort.perform(buildAction(command, existingAction));
 	}
 	
 	private Action buildAction(ActionUpdateCommand command, Action existingAction) {

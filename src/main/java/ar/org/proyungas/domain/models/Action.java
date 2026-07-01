@@ -6,6 +6,7 @@ import java.util.UUID;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionLayer;
 import lombok.Builder;
 import lombok.Value;
+import lombok.With;
 
 @Builder
 @Value
@@ -14,8 +15,11 @@ public class Action {
 	String actionNumber;
 	PlanType planType;
 	String propertyOwner;
+	@With
 	String applicantId;
+	@With
 	String uploadedById;
+	@With
 	String derivativeStatus;
 	List<ActionLayer> layers;
 	List<EmailNotification> emailNotifications;

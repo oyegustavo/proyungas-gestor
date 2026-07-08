@@ -1,4 +1,4 @@
-package ar.org.proyungas.infrastructure.output.persistence.entities;
+package ar.org.proyungas.domain.models;
 
 import java.util.UUID;
 
@@ -9,7 +9,7 @@ import lombok.Value;
 @Value
 public class ActionLayer {
     UUID id;
-    LayerTemplateEntity layerTemplate;
+    LayerTemplate layerTemplate;
     String currentStatus;
     UUID technicianAssignedId;
     UUID currentVersionId;

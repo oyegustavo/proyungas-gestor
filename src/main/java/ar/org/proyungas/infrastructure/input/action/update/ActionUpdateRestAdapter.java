@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +41,11 @@ public class ActionUpdateRestAdapter {
     @PutMapping
     public ResponseEntity<Void> perform(
             @PathVariable String actionNumber,
-            @RequestBody @Valid ActionUpdateRequest actionUpdateRequest) {
+            @RequestBody @Valid ActionUpdateRequest actionUpdateRequest,
+            HttpServletRequest request) {
         log.info("Starting executing service PUT /action/{actionNumber} - REQUEST: {}", actionNumber, actionUpdateRequest);
 
-        actionUpdater.perform(actionUpdateRestMapper.toCommand(actionUpdateRequest), actionNumber);
+        actionUpdater.perform(actionUpdateRestMapper.toCommand(actionUpdateRequest), actionNumber, request);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 

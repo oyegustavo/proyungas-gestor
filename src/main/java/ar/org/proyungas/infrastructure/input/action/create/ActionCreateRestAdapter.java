@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,9 +36,10 @@ public class ActionCreateRestAdapter {
             @ApiResponse(responseCode = "503", description = "Service unavailable", content = @Content) })
 
     @PostMapping
-    public ResponseEntity<ActionCreateResponse> perform(@RequestBody @Valid ActionCreateRequest request) {
+    public ResponseEntity<ActionCreateResponse> perform(@RequestBody @Valid ActionCreateRequest actionCreateRequest
+    		, HttpServletRequest request) {
         log.info("Start executing service POST /action - REQUEST: {}", request);
-        return new ResponseEntity<>(mapper.toResponse(actionCreate.perform(mapper.toCommand(request))),
+        return new ResponseEntity<>(mapper.toResponse(actionCreate.perform(mapper.toCommand(actionCreateRequest), request)),
                 HttpStatus.CREATED);
     }
 }

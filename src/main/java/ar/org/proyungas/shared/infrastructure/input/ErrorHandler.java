@@ -66,6 +66,18 @@ public class ErrorHandler {
     public ResponseEntity<ErrorResponse> handle(ActionBadRequestException ex) {
         return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_ACTION_ERROR);
     }
+    
+    @ExceptionHandler(ForbiddenActionApplicantException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(ForbiddenActionApplicantException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.FORBIDDEN_ACTION_APPLICANT);
+    }
+    
+    @ExceptionHandler(InvalidActionApplicantException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(InvalidActionApplicantException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_ACTION_APPLICANT_ERROR);
+    }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

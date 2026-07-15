@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -27,4 +28,5 @@ public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
     Page<ActionEntity> findByApplicantIdOrderByCreatedAtDesc(String applicantId, Pageable pageable);
 
+    Page<ActionEntity> findAll(Specification<ActionEntity> specification, Pageable pageable);
 }

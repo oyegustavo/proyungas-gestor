@@ -3,6 +3,10 @@ package ar.org.proyungas.infrastructure.output.persistence.action.get.byapplican
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
@@ -24,13 +28,13 @@ public class ActionByApplicantFinderJpaOutputAdapter implements ActionByApplican
 	private final ActionPersistenceMapper mapper;
 	
 	@Override
-	public List <Action> perform(String applicantId) {
+	public List <Action> perform(String applicantId, Integer page, Integer size) {
 		log.info("Starting ActionByApplicantFinderJpaOutputAdapter applicantId: {}", applicantId);
 
 		try {
-			List<ActionEntity> actionEntities = repository.findByApplicantIdOrderByCreatedAtAsc(applicantId);
-
-			return mapper.toDomain(actionEntities);
+		    Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
+		    Page<ActionEntity> actionEntities = repository.findByApplicantIdOrderByCreatedAtAsc(applicantId, pageable);
+			return mapper.toDomain(actionEntities.getContent());
 		} catch (DataAccessException e) {
 			log.error(
 					"Database connection error while performing ActionByApplicantFinderJpaOutputAdapter with applicantId: {}",
@@ -38,5 +42,4 @@ public class ActionByApplicantFinderJpaOutputAdapter implements ActionByApplican
 			throw new DatabaseConnectionException(ErrorCode.DATABASE_ERROR);
 		}
 	}
-
 }

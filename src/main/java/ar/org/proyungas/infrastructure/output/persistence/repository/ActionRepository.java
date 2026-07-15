@@ -1,10 +1,11 @@
 package ar.org.proyungas.infrastructure.output.persistence.repository;
 
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -21,8 +22,9 @@ public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
     Optional<ActionEntity> findByActionNumber(String actionNumber);
     
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
-    List<ActionEntity> findByApplicantIdOrderByCreatedAtAsc(String applicantId);
+    Page<ActionEntity> findByApplicantIdOrderByCreatedAtAsc(String applicantId, Pageable pageable);
 
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
-    List<ActionEntity> findByApplicantIdOrderByCreatedAtDesc(String applicantId);
+    Page<ActionEntity> findByApplicantIdOrderByCreatedAtDesc(String applicantId, Pageable pageable);
+
 }

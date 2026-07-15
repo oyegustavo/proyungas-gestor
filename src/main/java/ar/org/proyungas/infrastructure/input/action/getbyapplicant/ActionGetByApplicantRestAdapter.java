@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.org.proyungas.application.action.get.byapplicant.ActionByApplicantFinder;
@@ -31,10 +32,14 @@ public class ActionGetByApplicantRestAdapter {
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
             @ApiResponse(responseCode = "503", description = "Service unavailable", content = @Content) })
     @GetMapping
-    public ResponseEntity<List<ActionByApplicantResponse>> perform(@PathVariable String applicantId) {
-        log.info("Calling GET /action/{applicantId} - applicantId: {}", applicantId);
+    public ResponseEntity<List<ActionByApplicantResponse>> perform(
+    		@PathVariable String applicantId,
+    		@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        log.info("Calling GET /action/applicant/{applicantId} - applicantId: {}, page: {}, size: {}", applicantId, page, size);
 
-        return ResponseEntity
-                .ok(mapper.toResponse(finder.perform(applicantId)));
+        return ResponseEntity.ok(
+                mapper.toResponse(finder.perform(applicantId, page, size))
+            );
     }
 }

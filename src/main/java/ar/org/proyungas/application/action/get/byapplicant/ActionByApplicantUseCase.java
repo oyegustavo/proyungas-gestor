@@ -17,9 +17,9 @@ public class ActionByApplicantUseCase implements ActionByApplicantFinder{
     private final ActionByApplicantOutputPort outputPort;
 	
 	@Override
-	public List<ActionByApplicantResult> perform(String applicantId) {
+	public List<ActionByApplicantResult> perform(String applicantId, Integer page, Integer size) {
 		log.info("Start performing ActionByApplicationUseCase with applicantId: {}", applicantId);
-		return mapper.toResult(outputPort.perform(applicantId));
+		return mapper.toResult(outputPort.perform(applicantId, page, size));
 	}
 
 }

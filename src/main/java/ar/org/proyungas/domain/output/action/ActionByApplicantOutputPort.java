@@ -5,5 +5,5 @@ import java.util.List;
 import ar.org.proyungas.domain.models.Action;
 
 public interface ActionByApplicantOutputPort {
-	List<Action> perform(String applicantId);
+	List<Action> perform(String applicantId, Integer page, Integer size);
 }

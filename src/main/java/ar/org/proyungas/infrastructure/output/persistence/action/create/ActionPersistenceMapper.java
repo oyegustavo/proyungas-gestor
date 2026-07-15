@@ -1,5 +1,7 @@
 package ar.org.proyungas.infrastructure.output.persistence.action.create;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -19,4 +21,7 @@ import ar.org.proyungas.infrastructure.output.persistence.vectoriallayer.create.
 	public interface ActionPersistenceMapper {
 	    Action toDomain(ActionEntity entity);
 	    ActionEntity toEntity(Action action);
+	    
+	    List<Action> toDomain(List<ActionEntity> entities);
+	    List<ActionEntity> toEntity(List<Action> actions);
 	}

@@ -1,4 +1,6 @@
-package ar.org.proyungas.infrastructure.input.action.getbyactionnumber;
+package ar.org.proyungas.infrastructure.input.action.getbyapplicant;
+
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.org.proyungas.application.action.get.byactionnumber.ActionByActionNumberFinder;
+import ar.org.proyungas.application.action.get.byapplicant.ActionByApplicantFinder;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,12 +17,12 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/action/number/{actionNumber}")
+@RequestMapping("/action/applicant/{applicantId}")
 @Slf4j
 @AllArgsConstructor
-public class ActionGetByActionNumberRestAdapter {
-    private final ActionByActionNumberFinder finder;
-    private final ActionByActionNumberRestMapper mapper;
+public class ActionGetByApplicantRestAdapter {
+    private final ActionByApplicantFinder finder;
+    private final ActionByApplicantRestMapper mapper;
 
     @Operation(summary = "Action", tags = "Action")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Data sent ok"),
@@ -29,10 +31,10 @@ public class ActionGetByActionNumberRestAdapter {
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
             @ApiResponse(responseCode = "503", description = "Service unavailable", content = @Content) })
     @GetMapping
-    public ResponseEntity<ActionByActionNumberResponse> perform(@PathVariable String actionNumber) {
-        log.info("Calling GET /action/{actionNumber} - actionNumber: {}", actionNumber);
+    public ResponseEntity<List<ActionByApplicantResponse>> perform(@PathVariable String applicantId) {
+        log.info("Calling GET /action/{applicantId} - applicantId: {}", applicantId);
 
         return ResponseEntity
-                .ok(mapper.toResponse(finder.perform(actionNumber)));
+                .ok(mapper.toResponse(finder.perform(applicantId)));
     }
 }

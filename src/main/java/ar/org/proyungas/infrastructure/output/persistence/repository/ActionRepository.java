@@ -1,6 +1,7 @@
 package ar.org.proyungas.infrastructure.output.persistence.repository;
 
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,4 +19,10 @@ public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
     
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
     Optional<ActionEntity> findByActionNumber(String actionNumber);
+    
+    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    List<ActionEntity> findByApplicantIdOrderByCreatedAtAsc(String applicantId);
+
+    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    List<ActionEntity> findByApplicantIdOrderByCreatedAtDesc(String applicantId);
 }

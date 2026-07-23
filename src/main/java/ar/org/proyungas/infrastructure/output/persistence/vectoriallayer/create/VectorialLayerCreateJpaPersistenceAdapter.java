@@ -6,10 +6,13 @@ import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.VectorialLayerCreateOutputPort;
+import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.LayerTemplateEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.VectorialLayerEntity;
+import ar.org.proyungas.infrastructure.output.persistence.repository.ActionRepository;
 import ar.org.proyungas.infrastructure.output.persistence.repository.LayerTemplateRepository;
 import ar.org.proyungas.infrastructure.output.persistence.repository.VectorialLayerRepository;
+import ar.org.proyungas.shared.infrastructure.input.ActionNotFoundException;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.LayerTemplateNotFoundException;
@@ -25,6 +28,8 @@ public class VectorialLayerCreateJpaPersistenceAdapter implements VectorialLayer
     private final VectorialLayerMapper mapper;
     private final VectorialLayerRepository repository;
     private final LayerTemplateRepository layerTemplateRepository;
+    private final ActionRepository actionRepository;
+    
 	
 	@Override
 	public VectorialLayer perform(VectorialLayer vectorialLayer) {
@@ -32,6 +37,11 @@ public class VectorialLayerCreateJpaPersistenceAdapter implements VectorialLayer
         try {
         	
         	VectorialLayerEntity vectorialLayerEntity = mapper.toEntity(vectorialLayer);
+        	
+        	ActionEntity actionEntity = actionRepository.findById(vectorialLayer.getAction().getId())
+        	.orElseThrow(()-> new ActionNotFoundException(ErrorCode.ACTION_NOT_FOUND));
+        	
+        	vectorialLayerEntity.setAction(actionEntity);
         	
         	LayerTemplateEntity layerTemplateEntity = layerTemplateRepository.
         	findById(vectorialLayer.getTemplateLayer().getId())

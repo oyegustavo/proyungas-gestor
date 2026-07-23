@@ -9,6 +9,7 @@ import lombok.Value;
 @Value
 public class VectorialLayer {
 	UUID id;
+	Action action;
 	LayerTemplate templateLayer;
 	String currentStatus;
 	UUID technicianAssignedId;

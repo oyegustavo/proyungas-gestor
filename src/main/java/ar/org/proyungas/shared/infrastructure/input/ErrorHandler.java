@@ -67,6 +67,12 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_ACTION_ERROR);
     }
     
+    @ExceptionHandler(VectorialLayerBadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(VectorialLayerBadRequestException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_VECTORIAL_LAYER_ERROR);
+    }
+    
     @ExceptionHandler(ForbiddenActionApplicantException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handle(ForbiddenActionApplicantException ex) {
@@ -95,6 +101,12 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handle(PlanTypeNotFoundException ex) {
         return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.PLAN_TYPE_NOT_FOUND);
+    }
+    
+    @ExceptionHandler(LayerTemplateNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorResponse> handle(LayerTemplateNotFoundException ex) {
+        return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.LAYER_TEMPLATE_NOT_FOUND_ERROR);
     }
     
     @ExceptionHandler(ActionNotFoundException.class)

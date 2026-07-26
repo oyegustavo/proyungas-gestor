@@ -1,7 +1,9 @@
-package ar.org.proyungas.application.vectoriallayer.create;
+package ar.org.proyungas.application.vectoriallayer.update;
 
 import java.util.UUID;
 
+import ar.org.proyungas.application.vectoriallayer.create.ActionCommand;
+import ar.org.proyungas.application.vectoriallayer.create.LayerTemplateCommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VectorialLayerCreateCommand {
+public class VectorialLayerUpdateCommand {
 	LayerTemplateCommand templateLayer;
 	ActionCommand action;
 	String currentStatus;

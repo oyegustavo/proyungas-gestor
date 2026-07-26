@@ -28,7 +28,6 @@ public class VectorialLayerCreateJpaPersistenceAdapter implements VectorialLayer
     private final VectorialLayerMapper mapper;
     private final VectorialLayerRepository repository;
     private final LayerTemplateRepository layerTemplateRepository;
-    private final ActionRepository actionRepository;
     
 	
 	@Override
@@ -37,11 +36,6 @@ public class VectorialLayerCreateJpaPersistenceAdapter implements VectorialLayer
         try {
         	
         	VectorialLayerEntity vectorialLayerEntity = mapper.toEntity(vectorialLayer);
-        	
-        	ActionEntity actionEntity = actionRepository.findById(vectorialLayer.getAction().getId())
-        	.orElseThrow(()-> new ActionNotFoundException(ErrorCode.ACTION_NOT_FOUND));
-        	
-        	vectorialLayerEntity.setAction(actionEntity);
         	
         	LayerTemplateEntity layerTemplateEntity = layerTemplateRepository.
         	findById(vectorialLayer.getTemplateLayer().getId())

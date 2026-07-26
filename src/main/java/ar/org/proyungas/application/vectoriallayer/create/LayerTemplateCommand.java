@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LayerTemplateCreateCommand {
+public class LayerTemplateCommand {
 	UUID id;
 }

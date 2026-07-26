@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LayerTemplateCreateRequest {
+public class LayerTemplateRequest {
 	UUID id;
 }

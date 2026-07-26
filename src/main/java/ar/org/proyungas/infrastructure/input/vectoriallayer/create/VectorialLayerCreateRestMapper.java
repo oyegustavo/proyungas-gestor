@@ -12,7 +12,7 @@ public interface VectorialLayerCreateRestMapper {
     VectorialLayerCreateCommand toCommand(VectorialLayerCreateRequest request);
     VectorialLayerCreateResponse toResponse(VectorialLayerCreateResult result);
 
-    default LayerTemplateCreateCommand toCommand(LayerTemplateCreateRequest request) {
+    default LayerTemplateCreateCommand toCommand(LayerTemplateRequest request) {
         if (request == null) return null;
         return LayerTemplateCreateCommand.builder()
                 .id(request.getId())

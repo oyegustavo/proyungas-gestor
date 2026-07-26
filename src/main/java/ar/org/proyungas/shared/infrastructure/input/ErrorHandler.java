@@ -109,6 +109,12 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.LAYER_TEMPLATE_NOT_FOUND_ERROR);
     }
     
+    @ExceptionHandler(VectorialLayerNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorResponse> handle(VectorialLayerNotFoundException ex) {
+        return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.VECTORIAL_LAYER_NOT_FOUND);
+    }
+    
     @ExceptionHandler(ActionNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handle(ActionNotFoundException ex) {

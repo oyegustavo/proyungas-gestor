@@ -27,7 +27,7 @@ public class VectorialLayerCreateRestAdapter {
 
     private final VectorialLayerCreateRestMapper mapper;
 
-    @Operation(summary = "Vectorial Layer Create", tags = "Vectorial Layers")
+    @Operation(summary = "Vectorial Layer Create", tags = "Vectorial Layer")
     @ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),

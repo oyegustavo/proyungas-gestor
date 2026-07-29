@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import ar.org.proyungas.domain.models.PlanType;
 import ar.org.proyungas.domain.output.plantype.PlanTypeByIdFinderOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.entities.PlanTypeEntity;
-import ar.org.proyungas.infrastructure.output.persistence.repository.PlanTypeRepository;
+import ar.org.proyungas.infrastructure.output.persistence.plantype.repository.PlanTypeRepository;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.PlanTypeNotFoundException;

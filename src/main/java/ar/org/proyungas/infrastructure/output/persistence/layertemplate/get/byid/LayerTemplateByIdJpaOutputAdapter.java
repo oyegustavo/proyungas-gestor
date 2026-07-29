@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import ar.org.proyungas.domain.models.LayerTemplate;
 import ar.org.proyungas.domain.output.action.LayerTemplateByIdFinderOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.entities.LayerTemplateEntity;
-import ar.org.proyungas.infrastructure.output.persistence.repository.LayerTemplateRepository;
+import ar.org.proyungas.infrastructure.output.persistence.layertemplate.repository.LayerTemplateRepository;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.PlanTypeNotFoundException;

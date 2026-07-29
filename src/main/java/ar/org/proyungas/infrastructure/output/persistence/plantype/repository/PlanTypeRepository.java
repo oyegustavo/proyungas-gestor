@@ -1,4 +1,4 @@
-package ar.org.proyungas.infrastructure.output.persistence.repository;
+package ar.org.proyungas.infrastructure.output.persistence.plantype.repository;
 
 import java.util.List;
 import java.util.UUID;

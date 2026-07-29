@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 public class VectorialLayerCreateCommand {
 	LayerTemplateCommand templateLayer;
 	ActionCommand action;
-	String currentStatus;
 	UUID technicianAssignedId;
-	UUID currentVersionId;
 	Boolean reinstatedFromOmitted;
 }

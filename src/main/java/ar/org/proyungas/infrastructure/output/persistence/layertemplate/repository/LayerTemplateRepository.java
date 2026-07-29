@@ -1,4 +1,4 @@
-package ar.org.proyungas.infrastructure.output.persistence.repository;
+package ar.org.proyungas.infrastructure.output.persistence.layertemplate.repository;
 
 import java.util.UUID;
 

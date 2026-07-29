@@ -1,4 +1,4 @@
-package ar.org.proyungas.infrastructure.output.persistence.repository;
+package ar.org.proyungas.infrastructure.output.persistence.action.repository;
 
 
 import java.util.Optional;

@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.output.action.ActionCreateOutputPort;
+import ar.org.proyungas.infrastructure.output.persistence.action.repository.ActionRepository;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.PlanTypeEntity;
-import ar.org.proyungas.infrastructure.output.persistence.repository.ActionRepository;
-import ar.org.proyungas.infrastructure.output.persistence.repository.PlanTypeRepository;
+import ar.org.proyungas.infrastructure.output.persistence.plantype.repository.PlanTypeRepository;
 import ar.org.proyungas.shared.infrastructure.input.ActionBadRequestException;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;

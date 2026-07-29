@@ -11,6 +11,7 @@ import ar.org.proyungas.infrastructure.output.persistence.entities.LayerTemplate
 import ar.org.proyungas.infrastructure.output.persistence.layertemplate.repository.LayerTemplateRepository;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
+import ar.org.proyungas.shared.infrastructure.input.LayerTemplateNotFoundException;
 import ar.org.proyungas.shared.infrastructure.input.PlanTypeNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class LayerTemplateByIdJpaOutputAdapter implements LayerTemplateByIdFinde
         
         try {
         	LayerTemplateEntity entity = repository.findById(id).orElseThrow(
-                    () -> new PlanTypeNotFoundException(ErrorCode.PLAN_TYPE_NOT_FOUND));
+                    () -> new LayerTemplateNotFoundException(ErrorCode.LAYER_TEMPLATE_NOT_FOUND_ERROR));
             log.info("LayerTemplateByIdJpaOutputAdapter performed successfully with: {}", id);
             return mapper.toDomain(entity);
         } catch (DataAccessException e) {

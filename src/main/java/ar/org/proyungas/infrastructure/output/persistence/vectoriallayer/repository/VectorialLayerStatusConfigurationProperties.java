@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "vectorial-layer.states")
-public class VectorialLayerStateConfigurationProperties {
+@ConfigurationProperties(prefix = "vectorial-layer.status")
+public class VectorialLayerStatusConfigurationProperties {
     private String withoutPresenting;
     private String ommited;
     private String inRevision;

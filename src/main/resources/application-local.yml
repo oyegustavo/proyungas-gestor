@@ -20,7 +20,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 vectorial-layer:
-  states:
+  status:
     withoutPresenting: SIN_PRESENTAR
     ommited: OMMITED
     inRevision: EN_REVISION

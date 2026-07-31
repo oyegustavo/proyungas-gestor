@@ -22,7 +22,9 @@ spring:
 vectorial-layer:
   status:
     withoutPresenting: SIN_PRESENTAR
-    ommited: OMMITED
+    ommited: OMITIDA
     inRevision: EN_REVISION
     approved: APROBADO
     observed: OBSERVADO
+    pending: PENDIENTE
+    toModify: A_MODIFICAR

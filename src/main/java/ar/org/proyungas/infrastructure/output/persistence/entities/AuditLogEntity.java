@@ -33,7 +33,7 @@ public class AuditLogEntity {
     private UUID id;
 
     @Column(name = "usuario_id")
-    private UUID userId;
+    private String username;
 
     @Column(name = "tipo_accion", length = 80, nullable = false)
     private String actionType;

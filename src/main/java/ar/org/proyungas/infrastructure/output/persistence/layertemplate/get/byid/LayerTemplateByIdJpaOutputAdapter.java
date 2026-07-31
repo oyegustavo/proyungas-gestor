@@ -12,7 +12,6 @@ import ar.org.proyungas.infrastructure.output.persistence.layertemplate.reposito
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.LayerTemplateNotFoundException;
-import ar.org.proyungas.shared.infrastructure.input.PlanTypeNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

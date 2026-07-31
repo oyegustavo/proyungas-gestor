@@ -8,6 +8,7 @@ import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.models.LayerTemplate;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.ActionByIdOutputPort;
+import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
 import ar.org.proyungas.domain.output.action.LayerTemplateByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerUpdateOutputPort;

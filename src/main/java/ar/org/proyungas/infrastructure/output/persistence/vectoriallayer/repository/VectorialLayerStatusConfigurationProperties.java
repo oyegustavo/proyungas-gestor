@@ -14,4 +14,6 @@ public class VectorialLayerStatusConfigurationProperties {
     private String inRevision;
     private String approved;
     private String observed;
+    private String pending;
+    private String toModify;
 }

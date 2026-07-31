@@ -67,6 +67,18 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_ACTION_ERROR);
     }
     
+    @ExceptionHandler(AuditLogBadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(AuditLogBadRequestException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.AUDIT_LOG_BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(InvalidStatusProgressionException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(InvalidStatusProgressionException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_STATUS_PROGRESSION_ERROR);
+    }
+    
     @ExceptionHandler(VectorialLayerBadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handle(VectorialLayerBadRequestException ex) {

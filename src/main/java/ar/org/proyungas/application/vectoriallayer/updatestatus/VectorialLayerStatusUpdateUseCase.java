@@ -16,6 +16,7 @@ import ar.org.proyungas.infrastructure.output.persistence.vectoriallayer.reposit
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.InvalidStatusProgressionException;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
+import ar.org.proyungas.shared.infrastructure.utils.JsonSerializerUtils;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -30,53 +31,68 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
     private final VectorialLayerUpdateOutputPort outputPort;
     private final VectorialLayerStatusConfigurationProperties status;
     private final AuditLogOutputPort auditLogOutputPort;
+    private final JsonSerializerUtils jsonSerializerUtils;
 
     private Map<String, Set<String>> allowedTransitions;
 
     @PostConstruct
     private void initTransitions() {
-        allowedTransitions = new HashMap<>();
-        allowedTransitions.put(status.getPending(), Set.of(status.getWithoutPresenting()));
-        allowedTransitions.put(status.getInRevision(), Set.of(status.getPending(), status.getToModify()));
-        allowedTransitions.put(status.getObserved(), Set.of(status.getPending()));
-        allowedTransitions.put(status.getOmmited(), Set.of(status.getWithoutPresenting()));
-        allowedTransitions.put(status.getApproved(), Set.of(status.getInRevision()));
-        allowedTransitions.put(status.getToModify(), Set.of(status.getApproved()));
+        allowedTransitions = Map.of(
+            status.getPending(), Set.of(status.getWithoutPresenting()),
+            status.getInRevision(), Set.of(status.getPending(), status.getToModify()),
+            status.getObserved(), Set.of(status.getPending()),
+            status.getOmmited(), Set.of(status.getWithoutPresenting()),
+            status.getApproved(), Set.of(status.getInRevision()),
+            status.getToModify(), Set.of(status.getApproved())
+        );
     }
 
     @Override
     public void perform(VectorialLayerStatusUpdateCommand command, UUID id, HttpServletRequest request) {
-        log.info("Start perform VectorialLayerStatusUpdateUseCase with request: {}", request);
+        log.info("Start VectorialLayerStatusUpdateUseCase with command: {}", command);
 
-        VectorialLayer vectorialLayer = vectorialLayerByIdFinderOutputPort.perform(id);
-        String currentStatus = vectorialLayer.getCurrentStatus();
+        VectorialLayer current = vectorialLayerByIdFinderOutputPort.perform(id);
+        String currentStatus = current.getCurrentStatus();
         String requestedStatus = command.getStatus();
 
-        if (isTransitionAllowed(requestedStatus, currentStatus)) {
-            outputPort.perform(vectorialLayer.withCurrentStatus(requestedStatus));
-            log.info("Status updated from {} to {}", currentStatus, requestedStatus);
-            
-            AuditLog auditLog = AuditLog.builder()
-                    .username(CurrentUserUtils.getUsername(request))
-                    .actionType("STATUS_UPDATE")
-                    .entityType("VectorialLayer")
-                    .entityId(vectorialLayer.getId())
-                    .previousState(currentStatus)
-                    .newState(requestedStatus)
-                    .clientIp(request.getRemoteAddr())
-                    .userAgent(request.getHeader("User-Agent"))
-                    .build();
-
-            auditLogOutputPort.perform(auditLog);
-            
-        } else {
+        if (!isTransitionAllowed(requestedStatus, currentStatus)) {
             log.error("Invalid Status Progression: {} → {}", currentStatus, requestedStatus);
             throw new InvalidStatusProgressionException(ErrorCode.INVALID_STATUS_PROGRESSION_ERROR);
         }
+
+        if (requestedStatus.equals(status.getOmmited()) && Boolean.TRUE.equals(current.getReinstatedFromOmitted())) {
+            log.error("VectorialLayer {} cannot be omitted again", id);
+            throw new InvalidStatusProgressionException(ErrorCode.INVALID_STATUS_PROGRESSION_ERROR);
+        }
+
+        VectorialLayer updated = current.withCurrentStatus(requestedStatus);
+
+        if (requestedStatus.equals(status.getOmmited()) && Boolean.FALSE.equals(current.getReinstatedFromOmitted())) {
+            updated = updated.withReinstatedFromOmitted(true);
+        }
+
+        outputPort.perform(updated);
+        log.info("Status updated from {} to {}", currentStatus, requestedStatus);
+
+        auditStatusChange(current, updated, request);
     }
 
     private boolean isTransitionAllowed(String requested, String current) {
-        return allowedTransitions.containsKey(requested) &&
-               allowedTransitions.get(requested).contains(current);
+        return allowedTransitions.getOrDefault(requested, Set.of()).contains(current);
+    }
+
+    private void auditStatusChange(VectorialLayer previous, VectorialLayer updated, HttpServletRequest request) {
+        AuditLog auditLog = AuditLog.builder()
+                .username(CurrentUserUtils.getUsername(request))
+                .actionType("STATUS_UPDATE")
+                .entityType("VectorialLayer")
+                .entityId(previous.getId())
+                .previousState(jsonSerializerUtils.toJson(previous))
+                .newState(jsonSerializerUtils.toJson(updated))
+                .clientIp(request.getRemoteAddr())
+                .userAgent(request.getHeader("User-Agent"))
+                .build();
+
+        auditLogOutputPort.perform(auditLog);
     }
 }

@@ -50,7 +50,7 @@ public enum ErrorCode {
   AUDIENCE_TYPE_NOT_REQUIRED_DEFENSE(144, "Audience Type Not Required Defense Error", "AUDIENCE_TYPE_NOT_REQUIRED_DEFENSE"),
   ACCUSED_CRIME_VICTIM_DUPLICATED(145, "Victim already associated to accused crime", "ACCUSED_CRIME_VICTIM_DUPLICATED"),
   VICTIM_LIST_EMPTY(146, "No victim identified to associate with accused crime", "VICTIM_LIST_EMPTY"),
-  DEFENSE_BAD_REQUEST_ERROR(147, "Defense Bad Request Error", "DEFENSE_BAD_REQUEST_ERROR"),
+  JSON_SERIALIZER_ERROR(147, "Json Serializer Error", "JSON_SERIALIZER_ERROR"),
   AGENCY_NOT_FOUND(148,"Agency Not Found", "AGENCY_NOT_FOUND"),
   ACCUSED_CRIME_BAD_REQUEST_ERROR(149, "Accused Crime Bad Request Error", "ACCUSED_CRIME_BAD_REQUEST_ERROR"),
   CASE_FILE_CRIME_SCENE_PRIMARY_CONFLICT(150, "A primary crime scene already exists for this case file", "CASE_FILE_CRIME_SCENE_PRIMARY_CONFLICT"),

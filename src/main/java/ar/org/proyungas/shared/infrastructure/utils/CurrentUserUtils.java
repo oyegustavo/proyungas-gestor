@@ -55,4 +55,17 @@ public class CurrentUserUtils {
     }
     return claimResponse;
   }
+  
+  public static String getUsername(HttpServletRequest httpServletRequest) {
+		String authorizationHeader = httpServletRequest.getHeader("Authorization");
+		String name = "";
+
+  if (authorizationHeader != null) {
+			authorizationHeader = authorizationHeader.replace("Bearer ", "");
+			Claims claims = Jwts.parser().setSigningKey("algun_codigo_secreto_aeiou".getBytes())
+					.parseClaimsJws(authorizationHeader).getBody();
+			name = (String) claims.get("user_name");
+		}
+		return name;
+  }
 }

@@ -16,7 +16,6 @@ import ar.org.proyungas.infrastructure.output.persistence.vectoriallayer.reposit
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.InvalidStatusProgressionException;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
-import ar.org.proyungas.shared.infrastructure.utils.UserInfo;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -58,7 +57,7 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
             log.info("Status updated from {} to {}", currentStatus, requestedStatus);
             
             AuditLog auditLog = AuditLog.builder()
-                    .username(extractUserId(request))
+                    .username(CurrentUserUtils.getUsername(request))
                     .actionType("STATUS_UPDATE")
                     .entityType("VectorialLayer")
                     .entityId(vectorialLayer.getId())
@@ -79,10 +78,5 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
     private boolean isTransitionAllowed(String requested, String current) {
         return allowedTransitions.containsKey(requested) &&
                allowedTransitions.get(requested).contains(current);
-    }
-    
-    private String extractUserId(HttpServletRequest request) {
-    	UserInfo userInfo = CurrentUserUtils.getUserInfo(request);
-        return userInfo.getUsername();
     }
 }

@@ -29,7 +29,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LayerStateHistory {
+public class LayerStatusHistoryEntity {
 	    @Id
 	    @GeneratedValue
 	    @Column(name = "id", nullable = false, updatable = false)
@@ -49,7 +49,7 @@ public class LayerStateHistory {
 	    private String action;
 
 	    @Column(name = "usuario_id", nullable = false)
-	    private UUID userId;
+	    private String userId;
 
 	    @Column(name = "observacion")
 	    private String observation;

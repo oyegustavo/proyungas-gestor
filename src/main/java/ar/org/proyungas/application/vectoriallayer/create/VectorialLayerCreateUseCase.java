@@ -1,7 +1,5 @@
 package ar.org.proyungas.application.vectoriallayer.create;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.LayerTemplate;
@@ -33,7 +31,7 @@ public class VectorialLayerCreateUseCase implements VectorialLayerCreator{
 		        vectorialLayer
 		        .withTemplateLayer(layerTemplate)
 		        .withCurrentStatus(vectorialLayerStatus.getWithoutPresenting())
-		        .withCurrentVersionId(UUID.randomUUID())
+		        .withCurrentVersion(null)
 				));
 	}
 }

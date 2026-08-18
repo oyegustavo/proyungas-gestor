@@ -8,8 +8,10 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.AuditLog;
+import ar.org.proyungas.domain.models.LayerStatusHistory;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
+import ar.org.proyungas.domain.output.action.LayerStatusHistoryOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerUpdateOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.vectoriallayer.repository.VectorialLayerStatusConfigurationProperties;
@@ -30,8 +32,8 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
     private final VectorialLayerByIdFinderOutputPort vectorialLayerByIdFinderOutputPort;
     private final VectorialLayerUpdateOutputPort outputPort;
     private final VectorialLayerStatusConfigurationProperties status;
-    private final AuditLogOutputPort auditLogOutputPort;
     private final JsonSerializerUtils jsonSerializerUtils;
+    private final LayerStatusHistoryOutputPort layerStatusHistoryOutputPort;
 
     private Map<String, Set<String>> allowedTransitions;
 
@@ -82,17 +84,16 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
     }
 
     private void auditStatusChange(VectorialLayer previous, VectorialLayer updated, HttpServletRequest request) {
-        AuditLog auditLog = AuditLog.builder()
-                .username(CurrentUserUtils.getUsername(request))
-                .actionType("STATUS_UPDATE")
-                .entityType("VectorialLayer")
-                .entityId(previous.getId())
-                .previousState(jsonSerializerUtils.toJson(previous))
-                .newState(jsonSerializerUtils.toJson(updated))
-                .clientIp(request.getRemoteAddr())
-                .userAgent(request.getHeader("User-Agent"))
-                .build();
+    	LayerStatusHistory layerStatusHistory = LayerStatusHistory.builder()
+    			.action("STATUS_UPDATE")
+    			.layerTemplate(updated.getTemplateLayer())
+    			.layerVersion(updated.getCurrentVersion())
+    			.previousState(jsonSerializerUtils.toJson(previous))
+    			.newState(jsonSerializerUtils.toJson(updated))
+    			.observation(null) //TODO: what's this
+    			.userId(CurrentUserUtils.getUsername(request))
+    			.build();
 
-        auditLogOutputPort.perform(auditLog);
+        layerStatusHistoryOutputPort.perform(layerStatusHistory);
     }
 }

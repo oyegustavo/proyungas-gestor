@@ -50,8 +50,9 @@ public class VectorialLayerEntity {
     @Column(name = "tecnico_asignado_id")
     private UUID technicianAssignedId;
 
-    @Column(name = "version_actual_id")
-    private UUID currentVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "version_actual_id")
+    private LayerVersionEntity currentVersion;
 
     @Column(name = "rehabilitada_desde_omitida", nullable = false)
     private Boolean reinstatedFromOmitted;

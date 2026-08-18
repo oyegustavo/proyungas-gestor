@@ -11,6 +11,7 @@ import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.ActionByIdOutputPort;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
 import ar.org.proyungas.domain.output.action.LayerTemplateByIdFinderOutputPort;
+import ar.org.proyungas.domain.output.action.LayerVersionByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerUpdateOutputPort;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
@@ -29,6 +30,7 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
     private final VectorialLayerByIdFinderOutputPort vectorialLayerByIdFinderOutputPort;
     private final ActionByIdOutputPort actionByIdOutputPort;
     private final LayerTemplateByIdFinderOutputPort layerTemplateByIdFinderOutputPort;
+    private final LayerVersionByIdFinderOutputPort layerVersionByIdFinderOutputPort;
     private final AuditLogOutputPort auditLogOutputPort;
     private final JsonSerializerUtils jsonSerializerUtils;
 	
@@ -76,7 +78,9 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
 	    }
 
 	    if (command.getCurrentVersionId() != null) {
-	        updated = updated.withCurrentVersionId(command.getCurrentVersionId());
+	        updated = updated.withCurrentVersion(
+	        		layerVersionByIdFinderOutputPort.perform(
+	        				command.getCurrentVersionId()));
 	    }
 
 	    if (command.getReinstatedFromOmitted() != null) {

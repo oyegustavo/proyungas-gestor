@@ -16,7 +16,7 @@ public class VectorialLayer {
 	LayerTemplate templateLayer;
 	String currentStatus;
 	UUID technicianAssignedId;
-	UUID currentVersionId;
+	LayerVersion currentVersion;
 	Boolean reinstatedFromOmitted;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;

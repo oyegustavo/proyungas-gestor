@@ -1,11 +1,12 @@
 package ar.org.proyungas.infrastructure.output.persistence.layerstatushistory.create;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import ar.org.proyungas.domain.models.LayerStatusHistory;
 import ar.org.proyungas.infrastructure.output.persistence.entities.LayerStatusHistoryEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LayerStatusHistoryMapper {
 	LayerStatusHistory toDomain(LayerStatusHistoryEntity entity);
 	LayerStatusHistoryEntity toEntity(LayerStatusHistory layerStatusHistory);

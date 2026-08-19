@@ -28,3 +28,8 @@ vectorial-layer:
     observed: OBSERVADO
     pending: PENDIENTE
     toModify: A_MODIFICAR
+
+service-client:
+  email:
+    baseUri: http://proyungas-email:8080
+    emailUri: /api/emails/send

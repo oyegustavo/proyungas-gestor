@@ -91,6 +91,12 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_VECTORIAL_LAYER_ERROR);
     }
     
+    @ExceptionHandler(EmailNotificationBadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(EmailNotificationBadRequestException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.EMAIL_NOTIFICATION_ERROR);
+    }
+    
     @ExceptionHandler(ForbiddenActionApplicantException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handle(ForbiddenActionApplicantException ex) {

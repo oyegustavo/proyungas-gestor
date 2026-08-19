@@ -37,11 +37,11 @@ public class EmailNotificationEntity {
 
 	    @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "actuacion_id", nullable = false)
-	    private ActionEntity actuacion;
+	    private ActionEntity action;
 
 	    @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "capa_id")
-	    private LayerTemplateEntity layer;
+	    private LayerTemplateEntity layerTemplate;
 
 	    @Column(name = "destinatario_id", nullable = false)
 	    private UUID recipientId;
@@ -50,7 +50,7 @@ public class EmailNotificationEntity {
 	    private String eventType;
 
 	    @Column(name = "estado_envio", length = 20, nullable = false)
-	    private String sendingState;
+	    private String statusSent;
 
 	    @Column(name = "intentos", nullable = false)
 	    private Integer attempts;

@@ -17,7 +17,7 @@ public class VectorialLayerUpdateCommand {
 	LayerTemplateCommand templateLayer;
 	ActionCommand action;
 	String currentStatus;
-	UUID technicianAssignedId;
+	String technicianAssigned;
 	UUID currentVersionId;
 	Boolean reinstatedFromOmitted;
 }

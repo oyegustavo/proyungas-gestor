@@ -13,7 +13,7 @@ public class ActionCreateResponse {
     String actionNumber;
     PlanType planType;
     String propertyOwner;
-    UserCreateResponse applicant;
-    UserCreateResponse uploadedBy;
+    String applicant;
+    String uploadedBy;
     String derivativeStatus;
 }

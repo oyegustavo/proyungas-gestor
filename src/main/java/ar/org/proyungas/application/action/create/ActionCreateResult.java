@@ -14,8 +14,8 @@ public class ActionCreateResult {
     String actionNumber;
     PlanType planType;
     String propertyOwner;
-    UserCreateResult applicant;
-    UserCreateResult uploadedBy;
+    String applicant;
+    String uploadedBy;
     String derivativeStatus;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;

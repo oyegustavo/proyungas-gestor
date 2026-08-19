@@ -14,7 +14,7 @@ public class Action {
 	PlanType planType;
 	String propertyOwner;
 	@With
-	String applicantId;
+	String applicant;
 	@With
 	String uploadedById;
 	@With

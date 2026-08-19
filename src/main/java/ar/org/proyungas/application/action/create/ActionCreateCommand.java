@@ -13,7 +13,7 @@ public class ActionCreateCommand {
     private String actionNumber;
     private PlanTypeCreateCommand planType;
     private String propertyOwner;
-    private String applicantId;
-    private String uploadedById;
+    private String applicant;
+    private String uploadedBy;
     private String derivativeStatus;
 }

@@ -49,7 +49,7 @@ public class ActionUpdateJpaPersistenceAdapter implements ActionUpdateOutputPort
 	
 	private ActionEntity buildActionEntity(Optional<ActionEntity> optionalEntity, Action action) {
 		ActionEntity existingEntity = optionalEntity.get();
-		existingEntity.setApplicantId(action.getApplicantId());
+		existingEntity.setApplicant(action.getApplicant());
 		existingEntity.setDerivativeStatus(action.getDerivativeStatus());
 		existingEntity.setUploadedById(action.getUploadedById());
 		return existingEntity;

@@ -39,6 +39,7 @@ public class EmailSenderAdapter implements EmailSenderOutputPort {
 
 		
 		this.restTemplate = restTemplate;
+		this.restTemplate.setErrorHandler(errorHandler);
 		this.emailSenderAdapterConfigurationProperties = emailSenderAdapterConfigurationProperties;
 	}
 

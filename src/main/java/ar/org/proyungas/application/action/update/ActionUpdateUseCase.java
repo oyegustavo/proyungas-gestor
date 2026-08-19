@@ -57,7 +57,7 @@ public class ActionUpdateUseCase implements ActionUpdater{
 	
 	private Action buildAction(ActionUpdateCommand command, Action existingAction) {
 	    return existingAction
-	        .withApplicantId(command.getApplicantId())
+	        .withApplicant(command.getApplicantId())
 	        .withDerivativeStatus(command.getDerivativeStatus())
 	        .withUploadedById(command.getUploadedById());
 	}

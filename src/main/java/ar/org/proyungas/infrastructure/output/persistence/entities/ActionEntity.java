@@ -52,7 +52,7 @@ public class ActionEntity {
     private String propertyOwner;
 
     @Column(name = "solicitante_id", nullable = false)
-    private String applicantId;
+    private String applicant;
 
     @Column(name = "cargado_por_id")
     private String uploadedById;

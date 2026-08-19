@@ -44,7 +44,7 @@ public class EmailNotificationEntity {
 	    private LayerTemplateEntity layerTemplate;
 
 	    @Column(name = "destinatario_id", nullable = false)
-	    private UUID recipientId;
+	    private String recipient;
 
 	    @Column(name = "tipo_evento", length = 60, nullable = false)
 	    private String eventType;

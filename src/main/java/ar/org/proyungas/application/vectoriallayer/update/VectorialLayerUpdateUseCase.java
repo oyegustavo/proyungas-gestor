@@ -87,8 +87,8 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
 	        updated = updated.withReinstatedFromOmitted(command.getReinstatedFromOmitted());
 	    }
 
-	    if (command.getTechnicianAssignedId() != null) {
-	        updated = updated.withTechnicianAssignedId(command.getTechnicianAssignedId());
+	    if (command.getTechnicianAssigned() != null) {
+	        updated = updated.withTechnicianAssigned(command.getTechnicianAssigned());
 	    }
 
 	    return updated;

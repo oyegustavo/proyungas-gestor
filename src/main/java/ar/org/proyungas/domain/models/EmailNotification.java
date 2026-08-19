@@ -3,8 +3,6 @@ package ar.org.proyungas.domain.models;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
-import ar.org.proyungas.infrastructure.output.persistence.entities.LayerTemplateEntity;
 import lombok.Builder;
 import lombok.Value;
 
@@ -12,9 +10,9 @@ import lombok.Value;
 @Value
 public class EmailNotification {
     private UUID id;
-    private ActionEntity action;
-    private LayerTemplateEntity layerTemplate;
-    private UUID recipientId;
+    private Action action;
+    private LayerTemplate layerTemplate;
+    private String recipient;
     private String eventType;
     private String statusSent;
     private Integer attempts;

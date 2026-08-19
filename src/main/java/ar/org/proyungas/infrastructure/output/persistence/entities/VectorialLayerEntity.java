@@ -48,7 +48,10 @@ public class VectorialLayerEntity {
     private String currentStatus;
 
     @Column(name = "tecnico_asignado_id")
-    private UUID technicianAssignedId;
+    private String technicianAssigned;
+    
+    @Column(name = "observacion")
+    private String observation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "version_actual_id")

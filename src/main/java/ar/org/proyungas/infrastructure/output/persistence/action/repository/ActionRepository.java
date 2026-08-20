@@ -23,10 +23,10 @@ public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
     Optional<ActionEntity> findByActionNumber(String actionNumber);
     
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
-    Page<ActionEntity> findByApplicantIdOrderByCreatedAtAsc(String applicantId, Pageable pageable);
+    Page<ActionEntity> findByApplicantOrderByCreatedAtAsc(String applicant, Pageable pageable);
 
     @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
-    Page<ActionEntity> findByApplicantIdOrderByCreatedAtDesc(String applicantId, Pageable pageable);
+    Page<ActionEntity> findByApplicantOrderByCreatedAtDesc(String applicant, Pageable pageable);
 
     Page<ActionEntity> findAll(Specification<ActionEntity> specification, Pageable pageable);
 }

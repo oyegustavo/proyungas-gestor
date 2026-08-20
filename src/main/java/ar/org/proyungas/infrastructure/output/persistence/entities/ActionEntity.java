@@ -75,7 +75,7 @@ public class ActionEntity {
     @Builder.Default
     private Set<ActionLayerEntity> layers = new HashSet<>();
     
-    @OneToMany(mappedBy = "actuacion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<EmailNotificationEntity> emailNotifications = new HashSet<>();
 

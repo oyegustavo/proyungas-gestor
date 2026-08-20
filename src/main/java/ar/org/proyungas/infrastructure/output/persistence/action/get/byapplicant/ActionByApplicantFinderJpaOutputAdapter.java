@@ -33,7 +33,7 @@ public class ActionByApplicantFinderJpaOutputAdapter implements ActionByApplican
 
 		try {
 		    Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
-		    Page<ActionEntity> actionEntities = repository.findByApplicantIdOrderByCreatedAtAsc(applicantId, pageable);
+		    Page<ActionEntity> actionEntities = repository.findByApplicantOrderByCreatedAtAsc(applicantId, pageable);
 			return mapper.toDomain(actionEntities.getContent());
 		} catch (DataAccessException e) {
 			log.error(

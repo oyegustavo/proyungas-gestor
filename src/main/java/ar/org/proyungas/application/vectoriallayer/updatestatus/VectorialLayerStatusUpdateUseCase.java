@@ -25,6 +25,7 @@ import ar.org.proyungas.infrastructure.output.rest.email.EmailMessage;
 import ar.org.proyungas.infrastructure.output.rest.email.EmailSenderOutputPort;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.InvalidStatusProgressionException;
+import ar.org.proyungas.shared.infrastructure.input.VectorialLayerBadRequestException;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
 import ar.org.proyungas.shared.infrastructure.utils.EmailTemplateType;
 import ar.org.proyungas.shared.infrastructure.utils.JsonSerializerUtils;
@@ -117,40 +118,40 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
         Map<String, Object> model = new HashMap<>();
 
         // Decide which template to use
-        if (status.getInRevision().equals(currentStatus) && status.getObserved().equals(requestedStatus)) {
+        if (status.getPending().equals(currentStatus) && status.getObserved().equals(requestedStatus)) {
             templateType = EmailTemplateType.CAPA_OBSERVADA;
             model.put("applicant_name", vectorialLayer.getAction().getApplicant());
-            model.put("layer_name", vectorialLayer.getTemplateLayer());
-            model.put("action_number", vectorialLayer.getAction());
+            model.put("layer_name", vectorialLayer.getTemplateLayer().getDescription());
+            model.put("action_number", vectorialLayer.getAction().getActionNumber());
             model.put("comment_observation", vectorialLayer.getObservation());
             model.put("system_url", buildSystemUrl(vectorialLayer.getAction().getActionNumber()));
         } else if (status.getInRevision().equals(currentStatus) && status.getApproved().equals(requestedStatus)) {
             templateType = EmailTemplateType.CAPA_APROBADA;
             model.put("applicant_name", vectorialLayer.getAction().getApplicant());
-            model.put("layer_name", vectorialLayer.getTemplateLayer());
-            model.put("action_number", vectorialLayer.getAction());
+            model.put("layer_name", vectorialLayer.getTemplateLayer().getDescription());
+            model.put("action_number", vectorialLayer.getAction().getActionNumber());
             model.put("system_url", buildSystemUrl(vectorialLayer.getAction().getActionNumber()));
         } else if (status.getWithoutPresenting().equals(currentStatus) && status.getOmmited().equals(requestedStatus)) {
             templateType = EmailTemplateType.CAPA_OMITIDA;
             model.put("applicant_name", vectorialLayer.getAction().getApplicant());
-            model.put("layer_name", vectorialLayer.getTemplateLayer());
-            model.put("action_number", vectorialLayer.getAction());
+            model.put("layer_name", vectorialLayer.getTemplateLayer().getDescription());
+            model.put("action_number", vectorialLayer.getAction().getActionNumber());
             model.put("system_url", buildSystemUrl(vectorialLayer.getAction().getActionNumber()));
         } else if (status.getPending().equals(currentStatus) && status.getInRevision().equals(requestedStatus)) {
             templateType = EmailTemplateType.ACTUACION_PENDIENTE;
             model.put("applicant_name", vectorialLayer.getAction().getApplicant());
-            model.put("action_number", vectorialLayer.getAction());
-            model.put("plan_type", vectorialLayer.getAction().getPlanType());
+            model.put("action_number", vectorialLayer.getAction().getActionNumber());
+            model.put("plan_type", vectorialLayer.getAction().getPlanType().getDescription());
         } else if (status.getApproved().equals(requestedStatus)) {
             templateType = EmailTemplateType.EXPEDIENTE_APROBADO;
             model.put("applicant_name", vectorialLayer.getAction().getApplicant());
-            model.put("action_number", vectorialLayer.getAction());
+            model.put("action_number", vectorialLayer.getAction().getActionNumber());
             model.put("system_url", buildSystemUrl(vectorialLayer.getAction().getActionNumber()));
         } else if (status.getObserved().equals(currentStatus) && status.getPending().equals(requestedStatus)) {
             templateType = EmailTemplateType.RECARGA_CAPA;
             model.put("technician_name", vectorialLayer.getTechnicianAssigned());
-            model.put("layer_name", vectorialLayer.getTemplateLayer());
-            model.put("action_number", vectorialLayer.getAction());
+            model.put("layer_name", vectorialLayer.getTemplateLayer().getDescription());
+            model.put("action_number", vectorialLayer.getAction().getActionNumber());
             model.put("system_url", buildSystemUrl(vectorialLayer.getAction().getActionNumber()));
         }
 
@@ -165,7 +166,8 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
             emailSenderOutputPort.perform(emailMessage);
             auditEmail(vectorialLayer, emailMessage);
         } else {
-            log.warn("No email template matched for transition {} → {}", currentStatus, requestedStatus);
+            log.error("No email template matched for transition {} → {}", currentStatus, requestedStatus);
+            throw new VectorialLayerBadRequestException(ErrorCode.INVALID_VECTORIAL_LAYER_ERROR);
         }
     }
 

@@ -36,7 +36,7 @@ public class LayerStatusHistoryEntity {
 	    private UUID id;
 
 	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "capa_id", nullable = false)
+	    @JoinColumn(name = "capa_template_id", nullable = false)
 	    private LayerTemplateEntity layerTemplate;
 
 	    @Column(name = "estado_anterior", length = 20)

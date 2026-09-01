@@ -11,10 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VectorialLayerCreateRequest {
-	LayerTemplateRequest templateLayer;
-	ActionRequest action;
-	LayerVersionRequest layerVersion;
-	UUID technicianAssignedId;
-	Boolean reinstatedFromOmitted;
+public class LayerVersionRequest {
+	LayerTemplateRequest layerTemplate;
+	Integer versionNumber;
+	String formatt;
+	String originalNumber;
+	String minioPath;
+	String minioBucket;
+	Long bytesSize;
+	String hashSha256;
+	String coordsSystem;
+	UUID uploadedById;
 }

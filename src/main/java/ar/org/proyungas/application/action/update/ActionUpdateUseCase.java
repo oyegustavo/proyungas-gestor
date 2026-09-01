@@ -1,5 +1,7 @@
 package ar.org.proyungas.application.action.update;
 
+import java.net.InetAddress;
+
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
@@ -40,6 +42,12 @@ public class ActionUpdateUseCase implements ActionUpdater{
         
         String previousJson = jsonSerializerUtils.toJson(existingAction);
         String newJson = jsonSerializerUtils.toJson(updatedAction);
+        InetAddress inetAddress = null;
+        try {
+        	inetAddress = InetAddress.getByName(request.getRemoteAddr());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
         
         AuditLog auditLog = AuditLog.builder()
                 .username(CurrentUserUtils.getUsername(request))
@@ -48,7 +56,7 @@ public class ActionUpdateUseCase implements ActionUpdater{
                 .entityId(existingAction.getId())
                 .previousState(previousJson)
                 .newState(newJson)
-                .clientIp(request.getRemoteAddr())
+                .clientIp(inetAddress)
                 .userAgent(request.getHeader("User-Agent"))
                 .build();
 

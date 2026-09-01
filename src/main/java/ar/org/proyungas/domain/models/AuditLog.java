@@ -1,5 +1,6 @@
 package ar.org.proyungas.domain.models;
 
+import java.net.InetAddress;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -15,6 +16,6 @@ public class AuditLog {
     UUID entityId;
     String previousState;
     String newState;
-    String clientIp;
+    InetAddress clientIp;
     String userAgent;
 }

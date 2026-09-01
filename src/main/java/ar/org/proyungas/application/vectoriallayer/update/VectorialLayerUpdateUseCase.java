@@ -1,8 +1,10 @@
 package ar.org.proyungas.application.vectoriallayer.update;
 
+import java.net.InetAddress;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.models.AuditLog;
@@ -16,7 +18,6 @@ import ar.org.proyungas.domain.output.action.VectorialLayerByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerUpdateOutputPort;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
 import ar.org.proyungas.shared.infrastructure.utils.JsonSerializerUtils;
-import ar.org.proyungas.shared.infrastructure.utils.UserInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @AllArgsConstructor
 @Slf4j
+@Transactional
 public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
 
     private final VectorialLayerUpdateOutputPort outputPort;
@@ -45,6 +47,12 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
         
         String previousJson = jsonSerializerUtils.toJson(vectorialLayer);
         String newJson = jsonSerializerUtils.toJson(updated);
+        InetAddress inetAddress = null;
+        try {
+        	inetAddress = InetAddress.getByName( request.getRemoteAddr());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
         
         AuditLog auditLog = AuditLog.builder()
                 .username(CurrentUserUtils.getUsername(request))
@@ -53,7 +61,7 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
                 .entityId(vectorialLayer.getId())
                 .previousState(previousJson)
                 .newState(newJson)
-                .clientIp(request.getRemoteAddr())
+                .clientIp(inetAddress)
                 .userAgent(request.getHeader("User-Agent"))
                 .build();
 

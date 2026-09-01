@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import ar.org.proyungas.application.vectoriallayer.create.ActionCommand;
 import ar.org.proyungas.application.vectoriallayer.create.LayerTemplateCommand;
+import ar.org.proyungas.application.vectoriallayer.create.LayerVersionCommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class VectorialLayerUpdateCommand {
 	LayerTemplateCommand templateLayer;
 	ActionCommand action;
+	LayerVersionCommand layerVersion;
 	String currentStatus;
 	String technicianAssigned;
 	UUID currentVersionId;

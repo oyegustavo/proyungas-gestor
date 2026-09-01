@@ -1,5 +1,6 @@
 package ar.org.proyungas.infrastructure.output.persistence.entities;
 
+import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -51,7 +52,7 @@ public class AuditLogEntity {
     private String newState;
 
     @Column(name = "ip_cliente", columnDefinition = "inet")
-    private String clientIp;
+    private InetAddress clientIp;
 
     @Column(name = "user_agent")
     private String userAgent;

@@ -51,9 +51,10 @@ public class ActionEntity {
     @Column(name = "propietario_predio", length = 300, nullable = false)
     private String propertyOwner;
 
-    @Column(name = "solicitante_id", nullable = false)
-    private String applicant;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="solicitante_id")
+    private UserEntity applicant;
+    
     @Column(name = "cargado_por_id")
     private String uploadedById;
 
@@ -70,10 +71,6 @@ public class ActionEntity {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-    
-    @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Builder.Default
-    private Set<ActionLayerEntity> layers = new HashSet<>();
     
     @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default

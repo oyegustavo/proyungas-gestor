@@ -1,0 +1,1 @@
+package ar.org.proyungas.infrastructure.output.persistence.user.get;

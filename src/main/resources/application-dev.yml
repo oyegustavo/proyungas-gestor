@@ -10,7 +10,7 @@ eureka:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/sgv
+    url: jdbc:postgresql://postgres-gestor:5432/sgv_gestor
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
@@ -19,3 +19,18 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+
+vectorial-layer:
+  status:
+    withoutPresenting: SIN_PRESENTAR
+    ommited: OMITIDA
+    inRevision: EN_REVISION
+    approved: APROBADO
+    observed: OBSERVADO
+    pending: PENDIENTE
+    toModify: A_MODIFICAR
+
+service-client:
+  email:
+    baseUri: http://localhost:8091
+    emailUri: /api/emails/send

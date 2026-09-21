@@ -13,7 +13,7 @@ public class ActionCreateRequest {
     private String actionNumber;
     private PlanTypeCreateRequest planType;
     private String propertyOwner;
-    private String applicant;
+    private UserRequest applicant;
     private String uploadedBy;
     private String derivativeStatus;
 }

@@ -1,10 +1,21 @@
 package ar.org.proyungas.domain.models;
 
-import java.util.UUID;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data 
 public class User {
-	UUID id;
+	Integer id;
 	String username;
 	String fullname;
 	String email;
+	String password;
+	Boolean enabled;
+	List<Role> roles;
 }

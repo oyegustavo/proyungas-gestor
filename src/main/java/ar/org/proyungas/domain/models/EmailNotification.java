@@ -12,7 +12,7 @@ public class EmailNotification {
     private UUID id;
     private Action action;
     private LayerTemplate layerTemplate;
-    private String recipient;
+    private User recipient;
     private String eventType;
     private String statusSent;
     private Integer attempts;

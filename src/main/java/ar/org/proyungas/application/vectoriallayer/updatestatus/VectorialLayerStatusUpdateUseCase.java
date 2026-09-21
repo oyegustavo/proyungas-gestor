@@ -157,7 +157,7 @@ public class VectorialLayerStatusUpdateUseCase implements VectorialLayerStatusUp
 
         if (templateType != null) {
             EmailMessage emailMessage = EmailMessage.builder()
-                    .to(vectorialLayer.getTechnicianAssigned()) // or technician email depending on template
+                    .to(vectorialLayer.getTechnicianAssigned().getEmail()) // or technician email depending on template
                     .templateType(templateType)
                     .model(model)
                     .retries(3)

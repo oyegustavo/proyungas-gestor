@@ -1,12 +1,13 @@
 package ar.org.proyungas.infrastructure.input.vectoriallayer.create;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import ar.org.proyungas.application.vectoriallayer.create.ActionCommand;
 import ar.org.proyungas.application.vectoriallayer.create.VectorialLayerCreateCommand;
 import ar.org.proyungas.application.vectoriallayer.create.VectorialLayerCreateResult;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface VectorialLayerCreateRestMapper {
 
     VectorialLayerCreateCommand toCommand(VectorialLayerCreateRequest request);

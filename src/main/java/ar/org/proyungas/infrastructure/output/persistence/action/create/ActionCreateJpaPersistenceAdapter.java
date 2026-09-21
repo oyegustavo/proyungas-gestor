@@ -42,7 +42,8 @@ public class ActionCreateJpaPersistenceAdapter implements ActionCreateOutputPort
         		    .orElseThrow(() -> new PlanTypeNotFoundException(ErrorCode.PLAN_TYPE_NOT_FOUND));
         		actionEntity.setPlanType(planType);
         		actionEntity.setActionNumber(action.getActionNumber());
-        		actionEntity.setApplicant(action.getApplicant());
+        		//TODO: crear mapper action.getApplicant()
+        		actionEntity.setApplicant(null);
         		actionEntity.setPropertyOwner(action.getPropertyOwner());
         		actionEntity.setUploadedById(action.getUploadedById());
         		actionEntity.setActionNumber(action.getActionNumber());

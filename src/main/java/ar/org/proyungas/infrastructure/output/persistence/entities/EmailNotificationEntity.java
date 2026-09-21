@@ -47,8 +47,9 @@ public class EmailNotificationEntity {
 	    @JoinColumn(name = "capa_template_id")
 	    private LayerTemplateEntity layerTemplate;
 
-	    @Column(name = "destinatario_id", nullable = false)
-	    private String recipient;
+	    @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name="destinatario_id")
+	    private UserEntity recipient;
 
 	    @Column(name = "tipo_evento", length = 60, nullable = false)
 	    private String eventType;
@@ -68,5 +69,4 @@ public class EmailNotificationEntity {
 
 	    @Column(name = "enviado_at")
 	    private LocalDateTime sentAt;
-	    
 }

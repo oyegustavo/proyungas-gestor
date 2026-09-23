@@ -33,7 +33,7 @@ public class UserByCriteriaGetAdapter {
     private final UserByCriteriaFinder userByCriteriaFinder;
     private final UserByCriteriaGetMapper mapper;
     
-    @Operation(summary = "List Users", tags = "users")
+    @Operation(summary = "List Users", tags = "User")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Data sent ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),

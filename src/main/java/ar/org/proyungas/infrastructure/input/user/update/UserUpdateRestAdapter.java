@@ -28,7 +28,7 @@ public class UserUpdateRestAdapter {
 
     private final UserUpdateRestMapper mapper;
 
-    @Operation(summary = "User Update", tags = "users")
+    @Operation(summary = "User Update", tags = "User")
     @ApiResponses(value = { @ApiResponse(responseCode = "204", description = "No Content"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),

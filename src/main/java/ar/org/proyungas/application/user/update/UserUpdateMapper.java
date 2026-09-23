@@ -12,7 +12,7 @@ public interface UserUpdateMapper {
 	UserUpdateResult toResult(User user);
 	
     @Mapping(target = "id", source = "existing.id")
-    @Mapping(target = "username", source = "existing.username")
+    @Mapping(target = "username", source = "command.username")
     @Mapping(target = "enabled", source = "command.enabled")
     @Mapping(target = "fullname", source = "command.fullname")
     @Mapping(target = "email", source = "command.email")

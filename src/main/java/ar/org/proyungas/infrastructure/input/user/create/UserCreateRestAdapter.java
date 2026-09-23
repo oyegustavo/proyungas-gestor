@@ -28,7 +28,7 @@ public class UserCreateRestAdapter {
 
 	private final UserCreateRestMapper mapper;
 
-	@Operation(summary = "User Create", tags = "users")
+	@Operation(summary = "User Create", tags = "User")
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Created"),
 			@ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
 			@ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),

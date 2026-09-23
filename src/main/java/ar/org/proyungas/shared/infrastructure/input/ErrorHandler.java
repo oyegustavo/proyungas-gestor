@@ -127,6 +127,12 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.PLAN_TYPE_NOT_FOUND);
     }
     
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorResponse> handle(UserNotFoundException ex) {
+        return buildResponseError(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND);
+    }
+    
     @ExceptionHandler(LayerTemplateNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResponse> handle(LayerTemplateNotFoundException ex) {

@@ -1,4 +1,4 @@
-package ar.org.proyungas.infrastructure.output.persistence.user.get;
+package ar.org.proyungas.infrastructure.output.persistence.user.get.byid;
 
 
 import org.springframework.dao.DataAccessException;

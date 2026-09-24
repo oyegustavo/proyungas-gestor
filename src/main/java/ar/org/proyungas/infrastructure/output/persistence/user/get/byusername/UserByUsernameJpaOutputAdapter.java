@@ -26,7 +26,7 @@ public class UserByUsernameJpaOutputAdapter implements UserByUsernameOutputPort{
         log.info("Start perform UserByUsernameJpaOutputAdapter with: {}", username);
         
         try {
-            UserEntity entity = repository.findByUsernameLikeIgnoreCase(username).orElseThrow(
+            UserEntity entity = repository.findByUsername(username).orElseThrow(
                     () -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
             log.info("UserByUsernameJpaOutputAdapter performed successfully with: {}", username);
             return mapper.toDomain(entity);

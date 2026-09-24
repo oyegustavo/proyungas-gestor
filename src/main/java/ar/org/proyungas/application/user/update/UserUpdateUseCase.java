@@ -40,7 +40,7 @@ public class UserUpdateUseCase implements UserUpdater{
             throw new InvalidUserException(ErrorCode.INVALID_USER_ERROR);
         }
         try {
-            outputPort.perform(mapper.toDomain(command, existing));
+            outputPort.perform(mapper.toDomain(command));
         } catch (DataIntegrityViolationException e) {
             log.error("DataIntegrityViolationException - {}", e.getLocalizedMessage());
             throw new UserBadRequestException(ErrorCode.USER_BAD_REQUEST);

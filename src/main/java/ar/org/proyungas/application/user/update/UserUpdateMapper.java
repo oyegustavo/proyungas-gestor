@@ -2,7 +2,6 @@ package ar.org.proyungas.application.user.update;
 
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import ar.org.proyungas.domain.models.User;
 
@@ -11,12 +10,13 @@ import ar.org.proyungas.domain.models.User;
 public interface UserUpdateMapper {
 	UserUpdateResult toResult(User user);
 	
-    @Mapping(target = "id", source = "existing.id")
-    @Mapping(target = "username", source = "command.username")
-    @Mapping(target = "enabled", source = "command.enabled")
-    @Mapping(target = "fullname", source = "command.fullname")
-    @Mapping(target = "email", source = "command.email")
-    @Mapping(target = "password", source = "command.password")
-    @Mapping(target = "roles", source = "command.roles")
-	User toDomain(UserUpdateCommand command, User existing);
+//    @Mapping(target = "id", source = "existing.id")
+//    @Mapping(target = "username", source = "command.username")
+//    @Mapping(target = "enabled", source = "command.enabled")
+//    @Mapping(target = "fullname", source = "command.fullname")
+//    @Mapping(target = "email", source = "command.email")
+//    @Mapping(target = "password", source = "command.password")
+//    @Mapping(target = "roles", source = "command.roles")
+//	User toDomain(UserUpdateCommand command, User existing);
+	User toDomain(UserUpdateCommand command);
 }

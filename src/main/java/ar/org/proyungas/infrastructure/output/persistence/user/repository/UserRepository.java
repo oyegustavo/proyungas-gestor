@@ -16,9 +16,7 @@ import ar.org.proyungas.infrastructure.output.persistence.entities.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Page<UserEntity> findAll(Specification<UserEntity> specification, Pageable pageable);
-//    Optional<UserEntity> findByUsernameLike(String username);
     @Query("SELECT u FROM UserEntity u WHERE LOWER(u.username) LIKE LOWER(CONCAT('%', :username, '%'))")
     Optional<UserEntity> findByUsernameLikeIgnoreCase(@Param("username") String username);
-
+    Optional<UserEntity> findByUsername(String username);
 }
-

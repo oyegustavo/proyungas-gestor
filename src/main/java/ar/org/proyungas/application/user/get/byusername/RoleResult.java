@@ -1,7 +1,5 @@
 package ar.org.proyungas.application.user.get.byusername;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UserByUsernameFinderResult {
+public class RoleResult {
 	Integer id;
-	String username;
-	String fullname;
-	String email;
-	String password;
-	Boolean enabled;
-	List<RoleResult> roles;
+	String role;
 }

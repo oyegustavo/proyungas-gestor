@@ -1,0 +1,51 @@
+package ar.org.proyungas.infrastructure.input.plantype.delete;
+
+import java.util.UUID;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import ar.org.proyungas.application.plantype.delete.PlanTypeDeleter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@RequestMapping("/plan-type/{planTypeId}")
+@Slf4j
+@AllArgsConstructor
+public class PlanTypeDeleteRestAdapter {
+
+    private final PlanTypeDeleter planTypeDeleter;
+
+    @Operation(summary = "Plan Type Delete", tags = "Plan Type")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Resource deleted"),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
+            @ApiResponse(responseCode = "503", description = "Service unavailable", content = @Content)
+    })
+    @DeleteMapping
+    public ResponseEntity<Void> perform(
+            @PathVariable UUID planTypeId,
+            @RequestParam String deleteReason,
+            HttpServletRequest request) {
+
+        log.info("Starting executing service DELETE /plan-type/{} - reason: {}", planTypeId, deleteReason);
+
+        planTypeDeleter.perform(planTypeId, request, deleteReason);
+
+        return ResponseEntity.noContent().build();
+    }
+}

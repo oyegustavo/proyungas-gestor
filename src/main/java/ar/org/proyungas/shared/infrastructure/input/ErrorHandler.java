@@ -108,6 +108,12 @@ public class ErrorHandler {
     public ResponseEntity<ErrorResponse> handle(InvalidActionApplicantException ex) {
         return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_ACTION_APPLICANT_ERROR);
     }
+    
+    @ExceptionHandler(InetAddressException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(InetAddressException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INET_ADDRESS_ERROR);
+    }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

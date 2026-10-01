@@ -11,6 +11,7 @@ import ar.org.proyungas.domain.output.action.ActionUpdateOutputPort;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.ForbiddenActionApplicantException;
+import ar.org.proyungas.shared.infrastructure.input.InetAddressException;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
 import ar.org.proyungas.shared.infrastructure.utils.JsonSerializerUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +47,8 @@ public class ActionUpdateUseCase implements ActionUpdater{
         try {
         	inetAddress = InetAddress.getByName(request.getRemoteAddr());
 		} catch (Exception e) {
-			// TODO: handle exception
+			log.error("Inet Adrress Error", e);
+			throw new InetAddressException(ErrorCode.INET_ADDRESS_ERROR);
 		}
         
         AuditLog auditLog = AuditLog.builder()

@@ -39,7 +39,7 @@ public class PlanTypeCreateRestAdapter {
     public ResponseEntity<PlanTypeCreateResponse> perform(@RequestBody @Valid PlanTypeCreateRequest planTypeCreateRequest
     		, HttpServletRequest request) {
         log.info("Start executing service POST /plan-type - REQUEST: {}", request);
-        return new ResponseEntity<>(mapper.toResponse(planTypeCreate.perform(mapper.toCommand(planTypeCreateRequest))),
+        return new ResponseEntity<>(mapper.toResponse(planTypeCreate.perform(mapper.toCommand(planTypeCreateRequest), request)),
                 HttpStatus.CREATED);
     }
 }

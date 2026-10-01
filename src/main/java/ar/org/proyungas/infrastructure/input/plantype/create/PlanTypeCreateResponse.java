@@ -1,4 +1,4 @@
-package ar.org.proyungas.domain.models;
+package ar.org.proyungas.infrastructure.input.plantype.create;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.UUID;
 import lombok.Builder;
 import lombok.Value;
 
-@Builder
 @Value
-public class PlanType {
+@Builder
+public class PlanTypeCreateResponse {
     UUID id;
     String code;
     String name;
@@ -18,5 +18,5 @@ public class PlanType {
     Boolean enabled;
     LocalDateTime dateFrom;
     LocalDateTime dateTo;
-    List<VectorialLayer> layers;
+    List<LayerTemplateResponse> layers;
 }

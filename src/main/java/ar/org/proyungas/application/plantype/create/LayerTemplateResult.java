@@ -1,4 +1,4 @@
-package ar.org.proyungas.domain.models;
+package ar.org.proyungas.application.plantype.create;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -6,9 +6,9 @@ import java.util.UUID;
 import lombok.Builder;
 import lombok.Value;
 
-@Builder
 @Value
-public class LayerTemplate {
+@Builder
+public class LayerTemplateResult {
 	UUID id;
 	String layerCode;
 	String label;

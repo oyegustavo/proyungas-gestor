@@ -7,7 +7,7 @@ import ar.org.proyungas.domain.models.PlanType;
 import ar.org.proyungas.infrastructure.output.persistence.entities.PlanTypeEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface PlanTypeMapper {
+public interface PlanTypePersistenceMapper {
     PlanType toDomain(PlanTypeEntity entity);
     PlanTypeEntity toEntity(PlanType domain);
 }

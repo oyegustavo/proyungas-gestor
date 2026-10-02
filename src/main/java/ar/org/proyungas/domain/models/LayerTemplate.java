@@ -1,6 +1,5 @@
 package ar.org.proyungas.domain.models;
 
-import java.util.List;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -16,5 +15,5 @@ public class LayerTemplate {
 	Integer order;
 	String description;
 	Boolean active;
-    List<VectorialLayer> vectorialLayers;
+	PlanType planType;
 }

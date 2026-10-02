@@ -1,5 +1,6 @@
 package ar.org.proyungas.domain.models;
 
+import java.util.Set;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -19,4 +20,6 @@ public class Action {
 	String uploadedById;
 	@With
 	String derivativeStatus;
+	Set<VectorialLayer> vectorialLayers;
+	Set<EmailNotification> emailNotifications;
 }

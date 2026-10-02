@@ -1,7 +1,9 @@
 package ar.org.proyungas.application.action.get.bycriteria;
 
+import java.util.Set;
 import java.util.UUID;
 
+import ar.org.proyungas.application.plantype.get.bycriteria.VectorialLayerByCriteriaFinderResult;
 import ar.org.proyungas.domain.models.PlanType;
 import lombok.Builder;
 import lombok.Value;
@@ -16,4 +18,5 @@ public class ActionByCriteriaFinderResult {
 	String applicantId;
 	String uploadedById;
 	String derivativeStatus;
+	Set<VectorialLayerByCriteriaFinderResult> vectorialLayers;
 }

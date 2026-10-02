@@ -1,25 +1,23 @@
-package ar.org.proyungas.domain.models;
+package ar.org.proyungas.infrastructure.input.plantype.getbycriteria;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import ar.org.proyungas.infrastructure.input.plantype.create.LayerTemplateResponse;
 import lombok.Builder;
 import lombok.Value;
-import lombok.With;
 
-@Builder
 @Value
-public class PlanType {
+@Builder
+public class PlanTypeByCriteriaGetResponse {
     UUID id;
     String code;
-	@With
     String name;
     String group;
     String description;
-	@With
     Boolean enabled;
     LocalDateTime dateFrom;
     LocalDateTime dateTo;
-    List<LayerTemplate> layers;
+    List<LayerTemplateResponse> layers;
 }

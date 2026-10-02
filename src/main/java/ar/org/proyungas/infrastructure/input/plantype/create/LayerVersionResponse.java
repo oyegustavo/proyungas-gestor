@@ -1,13 +1,13 @@
-package ar.org.proyungas.domain.models;
+package ar.org.proyungas.infrastructure.input.plantype.create;
 
 import java.util.UUID;
 
 import lombok.Builder;
 import lombok.Value;
 
-@Builder
 @Value
-public class LayerVersion {
+@Builder
+public class LayerVersionResponse {
 	UUID id;
 	Integer versionNumber;
 	String formatt;

@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/plan-type")
+@RequestMapping("/plan-type/enabled")
 @Slf4j
 @AllArgsConstructor
 public class PlanTypeGetByEnabledRestAdapter {

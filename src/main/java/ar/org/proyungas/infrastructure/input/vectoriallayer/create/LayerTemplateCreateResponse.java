@@ -1,6 +1,5 @@
 package ar.org.proyungas.infrastructure.input.vectoriallayer.create;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -16,6 +15,5 @@ public class LayerTemplateCreateResponse {
 	Integer order;
 	String description;
 	Boolean active;
-	LocalDateTime createdAt;
 	PlanTypeCreateResponse planType;
 }

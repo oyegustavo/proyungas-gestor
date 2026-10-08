@@ -16,16 +16,16 @@ import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 @Repository
 public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
 
-    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    @EntityGraph(attributePaths = {"emailNotifications", "vectorialLayers"})
     Optional<ActionEntity> findById(UUID id);
     
-    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    @EntityGraph(attributePaths = { "emailNotifications", "vectorialLayers"})
     Optional<ActionEntity> findByActionNumber(String actionNumber);
     
-    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    @EntityGraph(attributePaths = {"emailNotifications", "vectorialLayers"})
     Page<ActionEntity> findByApplicantOrderByCreatedAtAsc(String applicant, Pageable pageable);
 
-    @EntityGraph(attributePaths = {"layers", "emailNotifications", "vectorialLayers"})
+    @EntityGraph(attributePaths = { "emailNotifications", "vectorialLayers"})
     Page<ActionEntity> findByApplicantOrderByCreatedAtDesc(String applicant, Pageable pageable);
 
     Page<ActionEntity> findAll(Specification<ActionEntity> specification, Pageable pageable);

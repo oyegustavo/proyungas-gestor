@@ -24,10 +24,12 @@ public class ActionCreateUseCase implements ActionCreator{
 	@Override
 	public ActionCreateResult perform(ActionCreateCommand command,  HttpServletRequest request) {
         log.info("Start performing ActionCreateUseCase with data: {}", command);
-        UserInfo userInfo = CurrentUserUtils.getUserInfo(request);
+//        UserInfo userInfo = CurrentUserUtils.getUserInfo(request);
+        String userName = CurrentUserUtils.getUsername(request);
         
-        User user = userByUsernameOutputPort.peform(userInfo.getUsername());
-        Action action = mapper.toDomain(command).withApplicant(user);
+        User user = userByUsernameOutputPort.peform(userName);
+        Action action = mapper.toDomain(command);
+//        Action action = mapper.toDomain(command).withApplicant(user);
         return mapper.toResult(outputPort.perform(action));
 	}
 

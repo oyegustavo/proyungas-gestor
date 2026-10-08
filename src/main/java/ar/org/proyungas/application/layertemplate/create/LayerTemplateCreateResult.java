@@ -1,14 +1,13 @@
-package ar.org.proyungas.domain.models;
+package ar.org.proyungas.application.layertemplate.create;
 
 import java.util.UUID;
 
 import lombok.Builder;
 import lombok.Value;
-import lombok.With;
 
-@Builder
 @Value
-public class LayerTemplate {
+@Builder
+public class LayerTemplateCreateResult {
 	UUID id;
 	String layerCode;
 	String label;
@@ -16,6 +15,4 @@ public class LayerTemplate {
 	Integer order;
 	String description;
 	Boolean active;
-	@With
-	PlanType planType;
 }

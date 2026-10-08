@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class CurrentUserUtils {
@@ -62,8 +63,13 @@ public class CurrentUserUtils {
 
   if (authorizationHeader != null) {
 			authorizationHeader = authorizationHeader.replace("Bearer ", "");
-			Claims claims = Jwts.parser().setSigningKey("algun_codigo_secreto_aeiou".getBytes())
-					.parseClaimsJws(authorizationHeader).getBody();
+//			Claims claims = Jwts.parser().setSigningKey("algun_codigo_secreto_aeiou".getBytes())
+//					.parseClaimsJws(authorizationHeader).getBody();
+			Claims claims = Jwts.parserBuilder()
+				    .setSigningKey(Keys.hmacShaKeyFor("algun_codigo_secreto_aeiou_mas_largo_123456".getBytes()))
+				    .build()
+				    .parseClaimsJws(authorizationHeader)
+				    .getBody();
 			name = (String) claims.get("user_name");
 		}
 		return name;

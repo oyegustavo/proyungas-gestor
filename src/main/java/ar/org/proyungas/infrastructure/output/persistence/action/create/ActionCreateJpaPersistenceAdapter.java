@@ -10,6 +10,7 @@ import ar.org.proyungas.infrastructure.output.persistence.action.repository.Acti
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.PlanTypeEntity;
 import ar.org.proyungas.infrastructure.output.persistence.plantype.repository.PlanTypeRepository;
+import ar.org.proyungas.infrastructure.output.persistence.user.create.UserPersistenceMapper;
 import ar.org.proyungas.shared.infrastructure.input.ActionBadRequestException;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
@@ -26,6 +27,7 @@ public class ActionCreateJpaPersistenceAdapter implements ActionCreateOutputPort
     private final ActionPersistenceMapper actionPersistenceMapper;
     private final ActionRepository actionRepository;
     private final PlanTypeRepository planTypeRepository;
+    private final UserPersistenceMapper userPersistenceMapper;
 
 	@Override
 	public Action perform(Action action) {
@@ -38,12 +40,15 @@ public class ActionCreateJpaPersistenceAdapter implements ActionCreateOutputPort
 			}
         	
     		ActionEntity actionEntity = new ActionEntity();
+    		if (action.getPlanType() == null || action.getPlanType().getId() == null) {
+				log.error("BAD REQUEST - Plan Type null in request");
+				throw new ActionBadRequestException(ErrorCode.BAD_REQUEST_ERROR);
+			}
         	PlanTypeEntity planType = planTypeRepository.findById(action.getPlanType().getId())
         		    .orElseThrow(() -> new PlanTypeNotFoundException(ErrorCode.PLAN_TYPE_NOT_FOUND));
         		actionEntity.setPlanType(planType);
         		actionEntity.setActionNumber(action.getActionNumber());
-        		//TODO: crear mapper action.getApplicant()
-        		actionEntity.setApplicant(null);
+        		actionEntity.setApplicant(userPersistenceMapper.toEntity(action.getApplicant()));
         		actionEntity.setPropertyOwner(action.getPropertyOwner());
         		actionEntity.setUploadedById(action.getUploadedById());
         		actionEntity.setActionNumber(action.getActionNumber());

@@ -2,6 +2,9 @@ package ar.org.proyungas.infrastructure.input.vectoriallayer.update;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import ar.org.proyungas.infrastructure.input.vectoriallayer.create.ActionRequest;
 import ar.org.proyungas.infrastructure.input.vectoriallayer.create.LayerTemplateRequest;
 import ar.org.proyungas.infrastructure.input.vectoriallayer.create.LayerVersionRequest;
@@ -14,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class VectorialLayerUpdateRequest {
 	LayerTemplateRequest templateLayer;
 	ActionRequest action;

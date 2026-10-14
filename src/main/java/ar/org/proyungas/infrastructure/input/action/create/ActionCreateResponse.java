@@ -2,7 +2,7 @@ package ar.org.proyungas.infrastructure.input.action.create;
 
 import java.util.UUID;
 
-import ar.org.proyungas.domain.models.PlanType;
+import ar.org.proyungas.infrastructure.input.plantype.create.PlanTypeCreateResponse;
 import lombok.Builder;
 import lombok.Value;
 
@@ -11,7 +11,7 @@ import lombok.Value;
 public class ActionCreateResponse {
     UUID id;
     String actionNumber;
-    PlanType planType;
+    PlanTypeCreateResponse planType;
     String propertyOwner;
     UserCreateResponse applicant;
     String uploadedBy;

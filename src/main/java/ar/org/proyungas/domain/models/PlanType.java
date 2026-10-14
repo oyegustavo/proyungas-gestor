@@ -19,6 +19,7 @@ public class PlanType {
     String description;
 	@With
     Boolean enabled;
+	@With
     LocalDateTime dateFrom;
     LocalDateTime dateTo;
     List<LayerTemplate> layers;

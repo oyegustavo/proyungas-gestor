@@ -67,6 +67,12 @@ public class ErrorHandler {
         return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_ACTION_ERROR);
     }
     
+    @ExceptionHandler(PlanTypeBadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handle(PlanTypeBadRequestException ex) {
+        return buildResponseError(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_PLAN_TYPE_ERROR);
+    }
+    
     @ExceptionHandler(JsonSerializerException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handle(JsonSerializerException ex) {

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.org.proyungas.application.action.create.ActionCreator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -32,7 +34,19 @@ public class ActionCreateRestAdapter {
     @Operation(
             summary = "Action Create",
             tags = "Action",
-            security = @SecurityRequirement(name = "bearerAuth")
+            security = @SecurityRequirement(name = "bearerAuth"),
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            		content = @Content(
+            				schema = @Schema(
+            						implementation = ActionCreateRequest.class
+            						),
+            				examples = {
+            						@ExampleObject(
+            								value = "{ \"actionNumber\": \"ACT-2026-001\", \"planType\": { \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\" }, \"propertyOwner\": \"John Doe\", \"applicant\": { \"id\": 42 }, \"uploadedBy\": \"adminUser\", \"derivativeStatus\": \"PENDING\" }"
+            								)
+            				}
+            				)
+            		)
         )
     @ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),

@@ -35,7 +35,7 @@ public class LayerTemplateCreateUseCase implements LayerTemplateCreator{
         
         PlanType planType = planTypeByIdFinderOutputPort.perform(command.getPlanType().getId());
         
-        LayerTemplate layerTemplate = outputPort.perform(mapper.toDomain(command)).withPlanType(planType);
+        LayerTemplate layerTemplate = outputPort.perform(mapper.toDomain(command));
         
         String previousJson = jsonSerializerUtils.toJson(layerTemplate);
         

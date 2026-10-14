@@ -14,6 +14,6 @@ public class ActionCreateCommand {
     private PlanTypeCreateCommand planType;
     private String propertyOwner;
     private UserCommand applicant;
-    private String uploadedBy;
+    private UserCommand uploadedBy;
     private String derivativeStatus;
 }

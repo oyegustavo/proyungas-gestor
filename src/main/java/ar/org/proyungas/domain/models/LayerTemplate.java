@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import lombok.Builder;
 import lombok.Value;
-import lombok.With;
 
 @Builder
 @Value
@@ -16,6 +15,4 @@ public class LayerTemplate {
 	Integer order;
 	String description;
 	Boolean active;
-	@With
-	PlanType planType;
 }

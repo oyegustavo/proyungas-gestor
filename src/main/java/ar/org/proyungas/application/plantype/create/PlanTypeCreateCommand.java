@@ -20,5 +20,5 @@ public class PlanTypeCreateCommand {
     Boolean enabled;
     LocalDateTime dateFrom;
     LocalDateTime dateTo;
-    List<VectorialLayerCommand> layers;
+    List<LayerTemplateCommand> layers;
 }

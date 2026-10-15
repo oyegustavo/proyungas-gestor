@@ -76,10 +76,10 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
 	        updated = updated.withAction(action);
 	    }
 
-	    if (command.getTemplateLayer() != null) {
-	        LayerTemplate template = layerTemplateByIdFinderOutputPort.perform(command.getTemplateLayer().getId());
-	        updated = updated.withTemplateLayer(template);
-	    }
+//	    if (command.getTemplateLayer() != null) {
+//	        LayerTemplate template = layerTemplateByIdFinderOutputPort.perform(command.getTemplateLayer().getId());
+//	        updated = updated.withTemplateLayer(template);
+//	    }
 
 	    if (command.getCurrentStatus() != null) {
 	        updated = updated.withCurrentStatus(command.getCurrentStatus());

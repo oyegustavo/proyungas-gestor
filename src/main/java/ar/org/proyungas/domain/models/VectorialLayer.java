@@ -1,6 +1,7 @@
 package ar.org.proyungas.domain.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -11,14 +12,15 @@ import lombok.With;
 @Value
 @With
 public class VectorialLayer {
-	UUID id;
-	String currentStatus;
-	User technicianAssigned;
-	String observation;
-	LayerVersion currentVersion;
-	Boolean reinstatedFromOmitted;
+    UUID id;
+    Action action;
+    LayerTemplate templateLayer;
+    String currentStatus;
+    User technicianAssigned;
+    String observation;
+    LayerVersion currentVersion;
+    Boolean reinstatedFromOmitted;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
-    LayerTemplate templateLayer;
-    Action action;
+    List<LayerVersion> versions;
 }

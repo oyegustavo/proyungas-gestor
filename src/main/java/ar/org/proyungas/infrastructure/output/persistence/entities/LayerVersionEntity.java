@@ -37,7 +37,7 @@ public class LayerVersionEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "capa_id", nullable = false)
-    private LayerTemplateEntity layerTemplate;
+    private VectorialLayerEntity layer;
 
     @Column(name = "numero_version", nullable = false)
     private Integer versionNumber;

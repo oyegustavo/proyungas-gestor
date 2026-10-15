@@ -1,5 +1,6 @@
 package ar.org.proyungas.domain.models;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -15,4 +16,5 @@ public class LayerTemplate {
 	Integer order;
 	String description;
 	Boolean active;
+    LocalDateTime createdAt;
 }

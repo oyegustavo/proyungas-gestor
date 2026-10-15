@@ -10,16 +10,16 @@ import lombok.With;
 
 @Builder
 @Value
+@With
 public class PlanType {
     UUID id;
     String code;
-	@With
     String name;
     String group;
     String description;
-	@With
     Boolean enabled;
-	@With
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
     LocalDateTime dateFrom;
     LocalDateTime dateTo;
     List<LayerTemplate> layers;

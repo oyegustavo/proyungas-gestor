@@ -26,7 +26,7 @@ public class PlanTypeCreateJpaPersistenceAdapter implements PlanTypeCreateOutput
     public PlanType perform(PlanType planType) {
         log.info("Starting perform PlanTypeCreateJpaPersistenceAdapter with data: {}", planType);
         try {
-            // Map domain to entity
+        	
             PlanTypeEntity planTypeEntity = mapper.toEntity(planType);
 
             if (planTypeEntity.getLayers() != null) {

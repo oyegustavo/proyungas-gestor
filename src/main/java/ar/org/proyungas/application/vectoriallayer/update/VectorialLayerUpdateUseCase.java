@@ -8,11 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.models.AuditLog;
-import ar.org.proyungas.domain.models.LayerTemplate;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.ActionByIdOutputPort;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
-import ar.org.proyungas.domain.output.action.LayerTemplateByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.LayerVersionByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerUpdateOutputPort;
@@ -31,7 +29,6 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
     private final VectorialLayerUpdateOutputPort outputPort;
     private final VectorialLayerByIdFinderOutputPort vectorialLayerByIdFinderOutputPort;
     private final ActionByIdOutputPort actionByIdOutputPort;
-    private final LayerTemplateByIdFinderOutputPort layerTemplateByIdFinderOutputPort;
     private final LayerVersionByIdFinderOutputPort layerVersionByIdFinderOutputPort;
     private final AuditLogOutputPort auditLogOutputPort;
     private final JsonSerializerUtils jsonSerializerUtils;

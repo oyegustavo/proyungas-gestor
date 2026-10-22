@@ -17,5 +17,5 @@ public class LayerVersion {
 	Long bytesSize;
 	String hashSha256;
 	String coordsSystem;
-	String uploadedById;
+	UUID uploadedById;
 }

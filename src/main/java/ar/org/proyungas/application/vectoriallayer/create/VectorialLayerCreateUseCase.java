@@ -3,6 +3,7 @@ package ar.org.proyungas.application.vectoriallayer.create;
 import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.LayerTemplate;
+import ar.org.proyungas.domain.models.LayerVersion;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.LayerTemplateByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerCreateOutputPort;
@@ -31,7 +32,21 @@ public class VectorialLayerCreateUseCase implements VectorialLayerCreator{
 		        vectorialLayer
 		        .withTemplateLayer(layerTemplate)
 		        .withCurrentStatus(vectorialLayerStatus.getWithoutPresenting())
-		        .withCurrentVersion(null)
+		        .withCurrentVersion(buildCurrentVersion(command.getLayerVersion()))
 				));
+	}
+	
+	private LayerVersion buildCurrentVersion(LayerVersionCommand layerVersionCommand) {
+		return LayerVersion.builder()
+				.bytesSize(layerVersionCommand.getBytesSize())
+				.coordsSystem(layerVersionCommand.getCoordsSystem())
+				.formatt(layerVersionCommand.getFormatt())
+				.hashSha256(layerVersionCommand.getHashSha256())
+				.minioBucket(layerVersionCommand.getMinioBucket())
+				.minioPath(layerVersionCommand.getMinioPath())
+				.originalNumber(layerVersionCommand.getOriginalNumber())
+				.uploadedById(layerVersionCommand.getUploadedById())
+				.versionNumber(layerVersionCommand.getVersionNumber())
+				.build();
 	}
 }

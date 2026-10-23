@@ -1,5 +1,5 @@
 spring:
   application:
-    name: api-gestor
+    name: proyungas-gestor
   profiles:
-    active: local
+    active: dev

@@ -7,17 +7,17 @@ INSERT INTO roles (role) VALUES
 -- Seed users
 INSERT INTO usuarios (cuit_cuil, nombre_completo, email, password, estado)
 VALUES
-('20-12345678-9', 'Juan Pérez', 'juan.perez@example.com', '$2a$10$abc...', true),
-('27-98765432-1', 'María Gómez', 'maria.gomez@example.com', '$2a$10$xyz...', true);
+('23258441729', 'Gustavo Valdez', 'gustvald@gmail.com', '$2a$10$MhXqsSRwKmE2QxqO2TEUfeze56dP2nBoaAFC6IdtrYcIRniISmSpG', true),
+('27987654321', 'María Gómez', 'maria.gomez@example.com', '$2a$10$MhXqsSRwKmE2QxqO2TEUfeze56dP2nBoaAFC6IdtrYcIRniISmSpG', true);
 
 -- Assign roles to users
 INSERT INTO users_roles (usuario_id, rol_id)
 SELECT u.id, r.id FROM usuarios u, roles r
-WHERE u.cuit_cuil = '20-12345678-9' AND r.role = 'ROLE_ADMIN';
+WHERE u.cuit_cuil = '23258441729' AND r.role = 'ROLE_ADMIN';
 
 INSERT INTO users_roles (usuario_id, rol_id)
 SELECT u.id, r.id FROM usuarios u, roles r
-WHERE u.cuit_cuil = '27-98765432-1' AND r.role = 'ROLE_SOLICITANTE';
+WHERE u.cuit_cuil = '27987654321' AND r.role = 'ROLE_SOLICITANTE';
 
 -- Seed plan types
 INSERT INTO tipo_plan (id, codigo, nombre, grupo, descripcion, activo, fecha_desde, created_at, updated_at)

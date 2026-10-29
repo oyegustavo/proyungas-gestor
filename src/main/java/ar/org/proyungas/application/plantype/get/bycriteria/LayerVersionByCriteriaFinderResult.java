@@ -2,6 +2,7 @@ package ar.org.proyungas.application.plantype.get.bycriteria;
 
 import java.util.UUID;
 
+import ar.org.proyungas.application.user.get.bycriteria.UserByCriteriaFinderResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,5 @@ public class LayerVersionByCriteriaFinderResult {
 	Long bytesSize;
 	String hashSha256;
 	String coordsSystem;
-	String uploadedById;
+	UserByCriteriaFinderResult uploadedById;
 }

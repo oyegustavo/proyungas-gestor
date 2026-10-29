@@ -8,12 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.models.AuditLog;
+import ar.org.proyungas.domain.models.User;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.ActionByIdOutputPort;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
 import ar.org.proyungas.domain.output.action.LayerVersionByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerUpdateOutputPort;
+import ar.org.proyungas.domain.output.user.UserByIdFinderOutputPort;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
 import ar.org.proyungas.shared.infrastructure.utils.JsonSerializerUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +33,7 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
     private final ActionByIdOutputPort actionByIdOutputPort;
     private final LayerVersionByIdFinderOutputPort layerVersionByIdFinderOutputPort;
     private final AuditLogOutputPort auditLogOutputPort;
+    private final UserByIdFinderOutputPort userByIdFinderOutputPort;
     private final JsonSerializerUtils jsonSerializerUtils;
 	
 	@Override
@@ -93,7 +96,8 @@ public class VectorialLayerUpdateUseCase implements VectorialLayerUpdater{
 	    }
 
 	    if (command.getTechnicianAssigned() != null) {
-	        updated = updated.withTechnicianAssigned(command.getTechnicianAssigned());
+	    	User technician = userByIdFinderOutputPort.peform(command.getTechnicianAssigned().getId());
+	        updated = updated.withTechnicianAssigned(technician);
 	    }
 
 	    return updated;

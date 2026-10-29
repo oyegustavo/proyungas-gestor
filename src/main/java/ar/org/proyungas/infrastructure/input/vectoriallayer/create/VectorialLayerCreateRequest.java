@@ -1,7 +1,5 @@
 package ar.org.proyungas.infrastructure.input.vectoriallayer.create;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -19,6 +17,6 @@ public class VectorialLayerCreateRequest {
 	LayerTemplateRequest templateLayer;
 	ActionRequest action;
 	LayerVersionRequest layerVersion;
-	UUID technicianAssignedId;
+	Integer technicianAssignedId;
 	Boolean reinstatedFromOmitted;
 }

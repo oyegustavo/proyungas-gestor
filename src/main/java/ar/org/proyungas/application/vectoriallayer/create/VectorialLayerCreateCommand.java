@@ -1,7 +1,5 @@
 package ar.org.proyungas.application.vectoriallayer.create;
 
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +13,6 @@ public class VectorialLayerCreateCommand {
 	LayerTemplateCommand templateLayer;
 	ActionCommand action;
 	LayerVersionCommand layerVersion;
-	UUID technicianAssignedId;
+	Integer technicianAssignedId;
 	Boolean reinstatedFromOmitted;
 }

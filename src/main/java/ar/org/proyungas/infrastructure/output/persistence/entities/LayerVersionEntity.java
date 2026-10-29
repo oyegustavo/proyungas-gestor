@@ -63,8 +63,9 @@ public class LayerVersionEntity {
     @Column(name = "sistema_coords", length = 50)
     private String coordsSystem;
 
-    @Column(name = "subido_por_id", nullable = false)
-    private UUID uploadedById;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="subido_por_id")
+    private UserEntity uploadedById;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)

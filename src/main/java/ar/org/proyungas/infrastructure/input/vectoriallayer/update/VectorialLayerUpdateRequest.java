@@ -23,7 +23,7 @@ public class VectorialLayerUpdateRequest {
 	ActionRequest action;
 	LayerVersionRequest layerVersion;
 	String currentStatus;
-	UUID technicianAssignedId;
+	Integer technicianAssignedId;
 	UUID currentVersionId;
 	Boolean reinstatedFromOmitted;
 }

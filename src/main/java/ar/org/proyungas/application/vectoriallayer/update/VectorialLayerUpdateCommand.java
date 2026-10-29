@@ -2,10 +2,10 @@ package ar.org.proyungas.application.vectoriallayer.update;
 
 import java.util.UUID;
 
+import ar.org.proyungas.application.action.create.UserCommand;
 import ar.org.proyungas.application.vectoriallayer.create.ActionCommand;
 import ar.org.proyungas.application.vectoriallayer.create.LayerTemplateCommand;
 import ar.org.proyungas.application.vectoriallayer.create.LayerVersionCommand;
-import ar.org.proyungas.domain.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class VectorialLayerUpdateCommand {
 	ActionCommand action;
 	LayerVersionCommand layerVersion;
 	String currentStatus;
-	User technicianAssigned;
+	UserCommand technicianAssigned;
 	UUID currentVersionId;
 	Boolean reinstatedFromOmitted;
 }

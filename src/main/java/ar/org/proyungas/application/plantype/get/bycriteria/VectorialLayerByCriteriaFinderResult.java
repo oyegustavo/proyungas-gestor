@@ -3,7 +3,7 @@ package ar.org.proyungas.application.plantype.get.bycriteria;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import ar.org.proyungas.domain.models.User;
+import ar.org.proyungas.application.user.get.bycriteria.UserByCriteriaFinderResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class VectorialLayerByCriteriaFinderResult {
 	UUID id;
 	String currentStatus;
-	User technicianAssigned;
+	UserByCriteriaFinderResult technicianAssigned;
 	String observation;
 	LayerVersionByCriteriaFinderResult currentVersion;
 	Boolean reinstatedFromOmitted;

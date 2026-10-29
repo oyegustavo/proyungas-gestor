@@ -17,5 +17,5 @@ public class LayerVersionResponse {
 	Long bytesSize;
 	String hashSha256;
 	String coordsSystem;
-	String uploadedById;
+	UserResponse uploadedById;
 }

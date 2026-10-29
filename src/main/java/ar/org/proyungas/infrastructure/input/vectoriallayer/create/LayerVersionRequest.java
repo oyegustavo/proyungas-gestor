@@ -1,7 +1,5 @@
 package ar.org.proyungas.infrastructure.input.vectoriallayer.create;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -25,5 +23,5 @@ public class LayerVersionRequest {
 	Long bytesSize;
 	String hashSha256;
 	String coordsSystem;
-	UUID uploadedById;
+	Integer uploadedById;
 }

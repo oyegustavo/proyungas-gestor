@@ -3,6 +3,7 @@ package ar.org.proyungas.application.vectoriallayer.create;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import ar.org.proyungas.application.action.create.UserCommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,6 @@ public class LayerVersionCommand {
 	Long bytesSize;
 	String hashSha256;
 	String coordsSystem;
-	UUID uploadedById;
+	Integer uploadedById;
 	LocalDateTime createdAt;
 }

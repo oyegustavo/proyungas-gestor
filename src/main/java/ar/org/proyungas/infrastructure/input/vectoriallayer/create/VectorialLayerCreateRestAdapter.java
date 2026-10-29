@@ -50,9 +50,9 @@ public class VectorialLayerCreateRestAdapter {
                                     "    \"bytes_size\": 123456,\n" +
                                     "    \"hash_sha256\": \"abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890\",\n" +
                                     "    \"coords_system\": \"EPSG:4326\",\n" +
-                                    "    \"uploaded_by_id\": \"99999999-aaaa-bbbb-cccc-111111111111\"\n" +
+                                    "    \"uploaded_by_id\": 1\n" +
                                     "  },\n" +
-                                    "  \"technician_assigned_id\": \"77777777-8888-9999-aaaa-bbbbbbbbbbbb\",\n" +
+                                    "  \"technician_assigned_id\": 1,\n" +
                                     "  \"reinstated_from_omitted\": true\n" +
                                     "}"
                         )
@@ -70,8 +70,7 @@ public class VectorialLayerCreateRestAdapter {
     @PostMapping
     public ResponseEntity<VectorialLayerCreateResponse> perform(@RequestBody @Valid VectorialLayerCreateRequest vectorialLayerCreateRequest
     		, HttpServletRequest request) {
-    	creator.perform(mapper.toCommand(vectorialLayerCreateRequest), request);
-        log.info("Start executing service POST /vectorial-layer - REQUEST: {}", request);
+        log.info("Start executing service POST /vectorial-layer - REQUEST: {}", vectorialLayerCreateRequest);
         return new ResponseEntity<>(mapper.toResponse(creator.perform(mapper.toCommand(vectorialLayerCreateRequest), request)),
                 HttpStatus.CREATED);
     }

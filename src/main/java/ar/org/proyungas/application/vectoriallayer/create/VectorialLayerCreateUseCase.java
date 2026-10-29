@@ -4,9 +4,11 @@ import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.LayerTemplate;
 import ar.org.proyungas.domain.models.LayerVersion;
+import ar.org.proyungas.domain.models.User;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.domain.output.action.LayerTemplateByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.action.VectorialLayerCreateOutputPort;
+import ar.org.proyungas.domain.output.user.UserByIdFinderOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.vectoriallayer.repository.VectorialLayerStatusConfigurationProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -21,22 +23,26 @@ public class VectorialLayerCreateUseCase implements VectorialLayerCreator{
     private final VectorialLayerCreateOutputPort outputPort;
 	private final LayerTemplateByIdFinderOutputPort layerTemplateByIdFinderOutputPort;
     private final VectorialLayerStatusConfigurationProperties vectorialLayerStatus;
+    private final UserByIdFinderOutputPort userByIdFinderOutputPort;
     
 	@Override
 	public VectorialLayerCreateResult perform(VectorialLayerCreateCommand command, HttpServletRequest request) {
         log.info("Start performing VectorialLayerCreateUseCase with data: {}", command);
         LayerTemplate layerTemplate = layerTemplateByIdFinderOutputPort.perform(command.getTemplateLayer().getId());
+        User technician = userByIdFinderOutputPort.peform(command.getTechnicianAssignedId());
         VectorialLayer vectorialLayer = mapper.toDomain(command);
         
 		return mapper.toResult(outputPort.perform(
 		        vectorialLayer
 		        .withTemplateLayer(layerTemplate)
+		        .withTechnicianAssigned(technician)
 		        .withCurrentStatus(vectorialLayerStatus.getWithoutPresenting())
 		        .withCurrentVersion(buildCurrentVersion(command.getLayerVersion()))
 				));
 	}
 	
 	private LayerVersion buildCurrentVersion(LayerVersionCommand layerVersionCommand) {
+		User uploader = userByIdFinderOutputPort.peform(layerVersionCommand.getUploadedById());
 		return LayerVersion.builder()
 				.bytesSize(layerVersionCommand.getBytesSize())
 				.coordsSystem(layerVersionCommand.getCoordsSystem())
@@ -45,7 +51,7 @@ public class VectorialLayerCreateUseCase implements VectorialLayerCreator{
 				.minioBucket(layerVersionCommand.getMinioBucket())
 				.minioPath(layerVersionCommand.getMinioPath())
 				.originalNumber(layerVersionCommand.getOriginalNumber())
-				.uploadedById(layerVersionCommand.getUploadedById())
+				.uploadedById(uploader)
 				.versionNumber(layerVersionCommand.getVersionNumber())
 				.build();
 	}

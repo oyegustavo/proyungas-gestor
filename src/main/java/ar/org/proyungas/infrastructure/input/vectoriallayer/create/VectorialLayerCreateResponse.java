@@ -12,7 +12,7 @@ public class VectorialLayerCreateResponse {
 	ActionResponse action;
 	LayerTemplateCreateResponse templateLayer;
 	String currentStatus;
-	UUID technicianAssignedId;
+	Integer technicianAssignedId;
 	UUID currentVersionId;
 	Boolean reinstatedFromOmitted;
 }

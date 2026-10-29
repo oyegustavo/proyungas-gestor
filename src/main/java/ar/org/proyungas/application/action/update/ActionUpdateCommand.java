@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ActionUpdateCommand {
-    private String applicantId;
-    private String uploadedById;
+    private Integer applicantId;
+    private Integer uploadedById;
     private String derivativeStatus;
 }

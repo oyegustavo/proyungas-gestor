@@ -42,7 +42,7 @@ public class ActionCreateRestAdapter {
             						),
             				examples = {
             						@ExampleObject(
-            								value = "{ \"actionNumber\": \"ACT-2026-001\", \"planType\": { \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\" }, \"propertyOwner\": \"John Doe\", \"applicant\": { \"id\": 42 }, \"uploadedBy\": \"adminUser\", \"derivativeStatus\": \"PENDING\" }"
+            								value = "{ \"action_number\": \"ACT-2026-001\", \"plan_type\": { \"id\": \"2b1f356f-63ea-425c-8ef4-c672217e6347\" }, \"property_owner\": \"John Doe\", \"applicant\": { \"id\": 1 }, \"uploaded_by\": { \"id\": 1 }, \"derivative_status\": \"PENDING\" }"
             								)
             				}
             				)

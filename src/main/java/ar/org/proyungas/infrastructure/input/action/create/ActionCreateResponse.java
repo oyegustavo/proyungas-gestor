@@ -14,6 +14,6 @@ public class ActionCreateResponse {
     PlanTypeCreateResponse planType;
     String propertyOwner;
     UserCreateResponse applicant;
-    String uploadedBy;
+    UserCreateResponse uploadedBy;
     String derivativeStatus;
 }

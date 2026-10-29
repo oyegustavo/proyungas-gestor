@@ -50,7 +50,7 @@ public class ActionCreateJpaPersistenceAdapter implements ActionCreateOutputPort
         		actionEntity.setActionNumber(action.getActionNumber());
         		actionEntity.setApplicant(userPersistenceMapper.toEntity(action.getApplicant()));
         		actionEntity.setPropertyOwner(action.getPropertyOwner());
-        		actionEntity.setUploadedById(action.getUploadedById());
+        		actionEntity.setUploadedBy(null);//TODO action.getUploadedBy()
         		actionEntity.setActionNumber(action.getActionNumber());
         		actionEntity.setDerivativeStatus(action.getDerivativeStatus());
         	return actionPersistenceMapper.toDomain(actionRepository.save(actionEntity));

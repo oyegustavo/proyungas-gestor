@@ -23,7 +23,8 @@ public class ActionByCriteriaFinderUseCase implements ActionByCriteriaFinder{
     private final ActionByCriteriaFinderMapper mapper;
 
     private static final List<String> ALLOWED_FILTERS =
-            Collections.unmodifiableList(Arrays.asList("actionNumber", "propertyOwner"));
+            Collections.unmodifiableList(Arrays.asList("actionNumber", "propertyOwner", "applicant"));
+
 	
 	
 	@Override

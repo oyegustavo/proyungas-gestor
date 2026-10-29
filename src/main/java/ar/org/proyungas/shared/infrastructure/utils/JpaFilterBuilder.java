@@ -16,7 +16,8 @@ public class JpaFilterBuilder {
 		    Collections.unmodifiableMap(
 		        Stream.of(
 		            new AbstractMap.SimpleEntry<>("actionNumber", "actionNumber"),
-		            new AbstractMap.SimpleEntry<>("propertyOwner", "propertyOwner")
+		            new AbstractMap.SimpleEntry<>("propertyOwner", "propertyOwner"),
+		            new AbstractMap.SimpleEntry<>("applicant", "applicant.id")
 		        ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
 		    );
 
@@ -24,7 +25,8 @@ public class JpaFilterBuilder {
     	    Collections.unmodifiableMap(
     	        Stream.of(
     	            new AbstractMap.SimpleEntry<>("actionNumber", new JpaStringFormatter()),
-    	            new AbstractMap.SimpleEntry<>("propertyOwner", new JpaStringFormatter())
+    	            new AbstractMap.SimpleEntry<>("propertyOwner", new JpaStringFormatter()),
+    	            new AbstractMap.SimpleEntry<>("applicant", new JpaIntegerFormatter())
     	        ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
     	    );
 

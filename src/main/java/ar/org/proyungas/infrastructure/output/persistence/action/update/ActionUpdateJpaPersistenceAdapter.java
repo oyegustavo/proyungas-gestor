@@ -11,6 +11,7 @@ import ar.org.proyungas.domain.output.action.ActionUpdateOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.action.create.ActionPersistenceMapper;
 import ar.org.proyungas.infrastructure.output.persistence.action.repository.ActionRepository;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
+import ar.org.proyungas.infrastructure.output.persistence.user.create.UserPersistenceMapper;
 import ar.org.proyungas.shared.infrastructure.input.ActionBadRequestException;
 import ar.org.proyungas.shared.infrastructure.input.ActionNotFoundException;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
@@ -25,6 +26,7 @@ public class ActionUpdateJpaPersistenceAdapter implements ActionUpdateOutputPort
 	
     private final ActionPersistenceMapper actionPersistenceMapper;
     private final ActionRepository actionRepository;
+    private final UserPersistenceMapper userPersistenceMapper;
 
 	@Override
 	public Action perform(Action action) {
@@ -49,10 +51,9 @@ public class ActionUpdateJpaPersistenceAdapter implements ActionUpdateOutputPort
 	
 	private ActionEntity buildActionEntity(Optional<ActionEntity> optionalEntity, Action action) {
 		ActionEntity existingEntity = optionalEntity.get();
-		//TODO: crear mapper action.getApplicant()
-		existingEntity.setApplicant(null);
+		existingEntity.setApplicant(userPersistenceMapper.toEntity(action.getApplicant()));
 		existingEntity.setDerivativeStatus(action.getDerivativeStatus());
-		existingEntity.setUploadedById(action.getUploadedById());
+		existingEntity.setUploadedBy(userPersistenceMapper.toEntity(action.getUploadedBy()));
 		return existingEntity;
 	}
 }

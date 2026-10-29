@@ -45,15 +45,17 @@ public class ActionByCriteriaGetAdapter {
 	            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
 	            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
 	            @Parameter(
-	                    explode = Explode.TRUE,
-	                    in = ParameterIn.QUERY,
-	                    name = "queryParams",
-	                    schema = @Schema(type = "object"),
-	                    examples = {
-	                            @ExampleObject(name = "actionNumber contains operation", value = "{\"actionNumber\":\"contains:Alf\"}"),
-	                            @ExampleObject(name = "propertyOwner equals operation", value = "{\"propertyOwner\":\"equals:12-34567876-9\"}")
-	                    },
-	                    description = "Enabled filters: actionNumber, propertyOwner")
+	            	    explode = Explode.TRUE,
+	            	    in = ParameterIn.QUERY,
+	            	    name = "queryParams",
+	            	    schema = @Schema(type = "object"),
+	            	    examples = {
+	            	        @ExampleObject(name = "actionNumber contains operation", value = "{\"actionNumber\":\"contains:Alf\"}"),
+	            	        @ExampleObject(name = "propertyOwner equals operation", value = "{\"propertyOwner\":\"equals:12-34567876-9\"}"),
+	            	        @ExampleObject(name = "applicant equals operation", value = "{\"applicant\":\"equals:123\"}")
+	            	    },
+	            	    description = "Enabled filters: actionNumber, propertyOwner, applicant"
+	            	)
 	            @RequestParam Map<String, String> filters) {
 
 

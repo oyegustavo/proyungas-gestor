@@ -6,9 +6,11 @@ import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.Action;
 import ar.org.proyungas.domain.models.AuditLog;
+import ar.org.proyungas.domain.models.User;
 import ar.org.proyungas.domain.output.action.ActionByActionNumberOutputPort;
 import ar.org.proyungas.domain.output.action.ActionUpdateOutputPort;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
+import ar.org.proyungas.domain.output.user.UserByIdFinderOutputPort;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.ForbiddenActionApplicantException;
 import ar.org.proyungas.shared.infrastructure.input.InetAddressException;
@@ -26,6 +28,7 @@ public class ActionUpdateUseCase implements ActionUpdater{
     private final ActionUpdateOutputPort actionUpdateOutputPort;
     private final ActionByActionNumberOutputPort actionByActionNumberFinderOutputPort;
     private final AuditLogOutputPort auditLogOutputPort;
+    private final UserByIdFinderOutputPort userByIdFinderOutputPort;
     private final JsonSerializerUtils jsonSerializerUtils;
 	
 	@Override
@@ -66,11 +69,13 @@ public class ActionUpdateUseCase implements ActionUpdater{
 	}
 	
 	private Action buildAction(ActionUpdateCommand command, Action existingAction) {
-		//TODO: findUserByUsername  -> command.getApplicantId()
+		
+		User applicant = userByIdFinderOutputPort.peform(command.getApplicantId());
+		User uploadedBy = userByIdFinderOutputPort.peform(command.getUploadedById());
 		
 	    return existingAction
-	        .withApplicant(null)
+	        .withApplicant(applicant)
 	        .withDerivativeStatus(command.getDerivativeStatus())
-	        .withUploadedById(command.getUploadedById());
+	        .withUploadedBy(uploadedBy);
 	}
 }

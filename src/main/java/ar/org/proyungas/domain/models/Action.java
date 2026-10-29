@@ -17,7 +17,7 @@ public class Action {
 	@With
 	User applicant;
 	@With
-	String uploadedById;
+	User uploadedBy;
 	@With
 	String derivativeStatus;
 	Set<VectorialLayer> vectorialLayers;

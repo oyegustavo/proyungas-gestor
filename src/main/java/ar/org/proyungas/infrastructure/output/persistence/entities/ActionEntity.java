@@ -55,8 +55,9 @@ public class ActionEntity {
     @JoinColumn(name="solicitante_id")
     private UserEntity applicant;
     
-    @Column(name = "cargado_por_id")
-    private String uploadedById;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cargado_por_id")
+    private UserEntity uploadedBy;
 
     @Column(name = "estado_derivado", length = 20, nullable = false)
     private String derivativeStatus;

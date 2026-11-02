@@ -1,16 +1,14 @@
 package ar.org.proyungas.shared.infrastructure.utils;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
-
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Root;
 import java.util.Map;
 
@@ -25,8 +23,18 @@ public class JpaEqualsFilter implements JpaFilter {
 
     @Override
     public <T> Specification<T> getSpecification() {
-        return (Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder)
-                -> criteriaBuilder.equal(JpaFilterUtils.getExpression(field, root), value);
+        return (Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
+            Path<?> path = root;
+            // 🔑 Traverse nested fields like "applicant.id"
+            for (String part : field.split("\\.")) {
+                path = path.get(part);
+            }
+
+            // Defensive logging (optional)
+            // System.out.println("Comparing field: " + field + " with value: " + value + " (" + value.getClass() + ")");
+
+            return cb.equal(path, value);
+        };
     }
 
     @Override
@@ -38,10 +46,13 @@ public class JpaEqualsFilter implements JpaFilter {
         if ("enabled".equals(equalsFilter.getKey())) {
             typedValue = Boolean.valueOf(String.valueOf(typedValue));
         }
-        // You can add more conversions here for other fields (e.g. Integer, Long, etc.)
+        if ("applicant".equals(equalsFilter.getKey())) {
+            // Ensure applicant values are parsed as Integer
+            typedValue = Integer.valueOf(String.valueOf(typedValue));
+        }
 
         return JpaEqualsFilter.builder()
-                .field(equalsFilter.getKey())   // must be the entity property name
+                .field(equalsFilter.getKey())   // will be translated later
                 .value(typedValue)
                 .build();
     }
@@ -53,7 +64,6 @@ public class JpaEqualsFilter implements JpaFilter {
             Object formattedValue = formatter.format(value);
             this.setValue(formattedValue);
         }
-
         return this;
     }
 
@@ -63,7 +73,6 @@ public class JpaEqualsFilter implements JpaFilter {
             String translatedField = translations.get(field);
             this.setField(translatedField);
         }
-
         return this;
     }
 }

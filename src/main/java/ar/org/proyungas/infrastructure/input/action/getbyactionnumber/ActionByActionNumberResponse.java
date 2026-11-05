@@ -1,8 +1,9 @@
 package ar.org.proyungas.infrastructure.input.action.getbyactionnumber;
 
+import java.util.Set;
 import java.util.UUID;
 
-import ar.org.proyungas.domain.models.PlanType;
+import ar.org.proyungas.infrastructure.input.plantype.create.VectorialLayerResponse;
 import lombok.Builder;
 import lombok.Value;
 
@@ -11,7 +12,8 @@ import lombok.Value;
 public class ActionByActionNumberResponse {
     UUID id;
     String actionNumber;
-    PlanType planType;
+    PlanTypeResponse planType;
     String propertyOwner;
     String derivativeStatus;
+    Set<VectorialLayerResponse> vectorialLayers;
 }

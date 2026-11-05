@@ -1,20 +1,20 @@
 package ar.org.proyungas.infrastructure.output.persistence.action.create;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import ar.org.proyungas.domain.models.Action;
-import ar.org.proyungas.domain.models.EmailNotification;
 import ar.org.proyungas.domain.models.LayerTemplate;
 import ar.org.proyungas.domain.models.LayerVersion;
 import ar.org.proyungas.domain.models.PlanType;
 import ar.org.proyungas.domain.models.User;
 import ar.org.proyungas.domain.models.VectorialLayer;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
-import ar.org.proyungas.infrastructure.output.persistence.entities.EmailNotificationEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.LayerTemplateEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.LayerVersionEntity;
 import ar.org.proyungas.infrastructure.output.persistence.entities.PlanTypeEntity;
@@ -24,18 +24,59 @@ import ar.org.proyungas.infrastructure.output.persistence.entities.VectorialLaye
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ActionPersistenceMapper {
 
-    @Mapping(target = "vectorialLayers", ignore = true)
     @Mapping(target = "emailNotifications", ignore = true)
     @Mapping(target = "planType", expression = "java(toPlanType(entity.getPlanType()))")
     @Mapping(target = "applicant", expression = "java(toUser(entity.getApplicant()))")
     @Mapping(target = "uploadedBy", expression = "java(toUser(entity.getUploadedBy()))")
+    @Mapping(target = "vectorialLayers", expression = "java(toVectorialLayers(entity.getVectorialLayers()))")
     Action toDomain(ActionEntity entity);
+    
+    // Add this for lists
+    List<Action> toDomain(List<ActionEntity> entities);
 
-    // Flatten PlanTypeEntity: ignore layers
-    @Mapping(target = "layers", ignore = true)
-    PlanType toPlanType(PlanTypeEntity entity);
+    // If you also need reverse mapping
+    List<ActionEntity> toEntity(List<Action> actions);
 
-    // Flatten LayerTemplateEntity: ignore planType
+    // Helper to flatten PlanTypeEntity
+    default PlanType toPlanType(PlanTypeEntity entity) {
+        if (entity == null) return null;
+        return PlanType.builder()
+                .id(entity.getId())
+                .code(entity.getCode())
+                .name(entity.getName())
+                .group(entity.getGroup())
+                .description(entity.getDescription())
+                .enabled(entity.getEnabled())
+                .dateFrom(entity.getDateFrom())
+                .dateTo(entity.getDateTo())
+                .build();
+    }
+
+    // Helper to flatten VectorialLayerEntity list
+    default Set<VectorialLayer> toVectorialLayers(Set<VectorialLayerEntity> entities) {
+        if (entities == null) return null;
+        return entities.stream()
+                .map(this::toVectorialLayer)
+                .collect(Collectors.toSet());
+    }
+
+    // Flatten VectorialLayerEntity
+    default VectorialLayer toVectorialLayer(VectorialLayerEntity entity) {
+        if (entity == null) return null;
+        return VectorialLayer.builder()
+                .id(entity.getId())
+                .templateLayer(toLayerTemplate(entity.getTemplateLayer()))
+                .currentStatus(entity.getCurrentStatus())
+                .technicianAssigned(toUser(entity.getTechnicianAssigned()))
+                .observation(entity.getObservation())
+                .currentVersion(toLayerVersion(entity.getCurrentVersion()))
+                .reinstatedFromOmitted(entity.getReinstatedFromOmitted())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .build();
+    }
+
+    // Flatten LayerTemplateEntity
     default LayerTemplate toLayerTemplate(LayerTemplateEntity entity) {
         if (entity == null) return null;
         return LayerTemplate.builder()
@@ -50,17 +91,7 @@ public interface ActionPersistenceMapper {
                 .build();
     }
 
-
-    // Flatten VectorialLayerEntity: ignore action, versions
-    @Mapping(target = "action", ignore = true)
-    @Mapping(target = "versions", ignore = true)
-    @Mapping(target = "templateLayer", expression = "java(toLayerTemplate(entity.getTemplateLayer()))")
-    @Mapping(target = "currentVersion", expression = "java(toLayerVersion(entity.getCurrentVersion()))")
-    @Mapping(target = "technicianAssigned", expression = "java(toUser(entity.getTechnicianAssigned()))")
-    VectorialLayer toDomain(VectorialLayerEntity entity);
-
-    // Flatten LayerVersionEntity: ignore layer
-    @Mapping(target = "uploadedById", expression = "java(toUser(entity.getUploadedById()))")
+    // Flatten LayerVersionEntity
     default LayerVersion toLayerVersion(LayerVersionEntity entity) {
         if (entity == null) return null;
         return LayerVersion.builder()
@@ -73,34 +104,16 @@ public interface ActionPersistenceMapper {
                 .bytesSize(entity.getBytesSize())
                 .hashSha256(entity.getHashSha256())
                 .coordsSystem(entity.getCoordsSystem())
+                .uploadedById(toUser(entity.getUploadedById()))
                 .build();
     }
 
-
-    // Flatten EmailNotificationEntity: ignore action, layer, layerTemplate
-    @Mapping(target = "action", ignore = true)
-    @Mapping(target = "layerTemplate", ignore = true)
-    @Mapping(target = "recipient", expression = "java(toUser(entity.getRecipient()))")
-    default EmailNotification toEmailNotification(EmailNotificationEntity entity) {
+    default User toUser(UserEntity entity) {
         if (entity == null) return null;
-        return EmailNotification.builder()
+        return User.builder()
                 .id(entity.getId())
-                .eventType(entity.getEventType())
-                .statusSent(entity.getStatusSent())
-                .attempts(entity.getAttempts())
-                .celeryTaskId(entity.getCeleryTaskId())
-                .createdAt(entity.getCreatedAt())
-                .sentAt(entity.getSentAt())
+                .fullname(entity.getFullname())
+                .email(entity.getEmail())
                 .build();
     }
-
-
-    User toUser(UserEntity entity);
-    
-    // Add this: MapStruct will generate the list mapping
-    List<Action> toDomain(List<ActionEntity> entities);
-
-    // If you need reverse mapping too
-    List<ActionEntity> toEntity(List<Action> actions);
 }
-

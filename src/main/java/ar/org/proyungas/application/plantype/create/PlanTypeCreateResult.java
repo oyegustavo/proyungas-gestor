@@ -14,7 +14,7 @@ public class PlanTypeCreateResult {
     String code;
     String name;
     String group;
-    String description;
+    String comments;
     Boolean enabled;
     LocalDateTime dateFrom;
     LocalDateTime dateTo;

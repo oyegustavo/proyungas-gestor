@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.org.proyungas.application.plantype.create.PlanTypeCreator;
-import ar.org.proyungas.infrastructure.input.action.create.ActionCreateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -40,7 +39,7 @@ public class PlanTypeCreateRestAdapter {
     	            schema = @Schema(implementation = PlanTypeCreateRequest.class),
     	            examples = {
     	                @ExampleObject(
-    	                    value = "{ \"code\": \"PMS\", \"name\": \"Plan de Manejo Sostenido\", \"group\": \"Otros Planes\", \"description\": \"description\", \"enabled\": true, \"date_from\": \"2026-07-01T00:00:00\", \"layers\": [{ \"layer_code\": \"id_tecnico\", \"label\": \"nombre visible\", \"required\": true, \"active\": true, \"description\": \"condicion opcional\", \"order\": 1  }] }"
+    	                    value = "{ \"code\": \"PMS\", \"name\": \"Plan de Manejo Sostenido\", \"group\": \"Otros Planes\", \"comments\": \"comments\", \"enabled\": true, \"date_from\": \"2026-07-01T00:00:00\", \"layers\": [{ \"layer_code\": \"id_tecnico\", \"label\": \"nombre visible\", \"required\": true, \"active\": true, \"description\": \"condicion opcional\", \"order\": 1  }] }"
     	                )
     	            }
     	        )
@@ -57,7 +56,7 @@ public class PlanTypeCreateRestAdapter {
     @PostMapping
     public ResponseEntity<PlanTypeCreateResponse> perform(@RequestBody @Valid PlanTypeCreateRequest planTypeCreateRequest
     		, HttpServletRequest request) {
-        log.info("Start executing service POST /plan-type - REQUEST: {}", request);
+        log.info("Start executing service POST /plan-type - REQUEST: {}", planTypeCreateRequest);
         return new ResponseEntity<>(mapper.toResponse(planTypeCreate.perform(mapper.toCommand(planTypeCreateRequest), request)),
                 HttpStatus.CREATED);
     }

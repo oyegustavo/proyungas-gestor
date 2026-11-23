@@ -3,6 +3,8 @@ package ar.org.proyungas.infrastructure.output.persistence.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -29,7 +31,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PlanTypeHistory {
+public class PlanTypeHistoryEntity {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false, updatable = false)
@@ -39,8 +41,9 @@ public class PlanTypeHistory {
     @JoinColumn(name = "tipo_plan_id", nullable = false)
     private PlanTypeEntity planType;
 
-    @Column(name = "usuario_id", nullable = false)
-    private UUID userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private UserEntity user;
 
     @Column(name = "accion", length = 50, nullable = false)
     private String action;
@@ -48,7 +51,8 @@ public class PlanTypeHistory {
     @Column(name = "comentario", nullable = false)
     private String comments;
 
-    @Column(name = "datos_previos", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "datos_previos")
     private String previousData;
 
     @CreatedDate

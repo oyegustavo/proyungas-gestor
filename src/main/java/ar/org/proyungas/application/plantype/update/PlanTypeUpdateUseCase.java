@@ -7,9 +7,11 @@ import org.springframework.stereotype.Component;
 
 import ar.org.proyungas.domain.models.AuditLog;
 import ar.org.proyungas.domain.models.PlanType;
+import ar.org.proyungas.domain.models.PlanTypeHistory;
 import ar.org.proyungas.domain.output.action.AuditLogOutputPort;
 import ar.org.proyungas.domain.output.plantype.PlanTypeByIdFinderOutputPort;
 import ar.org.proyungas.domain.output.plantype.PlanTypeUpdateOutputPort;
+import ar.org.proyungas.domain.output.plantypehistory.PlanTypeHistoryOutputPort;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
 import ar.org.proyungas.shared.infrastructure.input.InetAddressException;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
@@ -27,6 +29,7 @@ public class PlanTypeUpdateUseCase implements PlanTypeUpdater{
     private final AuditLogOutputPort auditLogOutputPort;
     private final PlanTypeByIdFinderOutputPort planTypeByIdFinderOutputPort;
     private final JsonSerializerUtils jsonSerializerUtils;
+    private final PlanTypeHistoryOutputPort planTypeHistoryOutputPort;
 
 	@Override
 	public void perform(PlanTypeUpdateCommand command, UUID planTypeId, HttpServletRequest request) {
@@ -59,6 +62,15 @@ public class PlanTypeUpdateUseCase implements PlanTypeUpdater{
                 .build();
 
         auditLogOutputPort.perform(auditLog);
+        
+        PlanTypeHistory planTypeHistory = PlanTypeHistory.builder()
+        		.action("UPDATED")
+        		.comments(command.getComments())
+        		.planType(updatedPlanType)
+        		.previousData(previousJson)
+        		.build();
+        
+        planTypeHistoryOutputPort.perform(planTypeHistory);
 		
 	}
 	

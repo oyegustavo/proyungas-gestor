@@ -8,10 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data 
-@Builder
 public class User {
 	Integer id;
 	String username;

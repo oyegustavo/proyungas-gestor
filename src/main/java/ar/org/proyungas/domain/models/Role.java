@@ -1,11 +1,15 @@
 package ar.org.proyungas.domain.models;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
 	Integer id;
 	String role;

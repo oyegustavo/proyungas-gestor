@@ -16,8 +16,8 @@ public class PlanTypeCreateCommand {
     String code;
     String name;
     String group;
-    String description;
     Boolean enabled;
+    String comments;
     LocalDateTime dateFrom;
     LocalDateTime dateTo;
     List<LayerTemplateCommand> layers;

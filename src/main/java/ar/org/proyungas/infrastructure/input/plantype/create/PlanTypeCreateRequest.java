@@ -18,7 +18,7 @@ public class PlanTypeCreateRequest {
     String code;
     String name;
     String group;
-    String description;
+    String comments;
     @Builder.Default
     private Boolean enabled = true;
     @JsonProperty("date_from")

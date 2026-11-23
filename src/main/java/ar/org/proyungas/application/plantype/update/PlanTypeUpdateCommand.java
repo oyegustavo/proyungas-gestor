@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class PlanTypeUpdateCommand {
     String name;
     Boolean enabled;
+    String comments;
 }

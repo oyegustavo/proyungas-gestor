@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoleUpdateCommand {
 	Integer id;
+	String role;
 }

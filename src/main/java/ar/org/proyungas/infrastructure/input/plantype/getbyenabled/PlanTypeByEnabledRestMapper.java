@@ -8,6 +8,5 @@ import ar.org.proyungas.application.plantype.get.byenabled.PlanTypeByEnabledResu
 
 @Mapper(componentModel = "spring")
 public interface PlanTypeByEnabledRestMapper {
-
 	List<PlanTypeByEnabledResponse> toResponse(List<PlanTypeByEnabledResult> response);
 }

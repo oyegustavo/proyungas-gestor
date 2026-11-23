@@ -41,8 +41,6 @@ public class PlanTypeCreateUseCase implements PlanTypeCreator{
         User user = userByUsernameOutputPort.peform(username);
         PlanType planType = outputPort.perform(mapper.toDomain(command));
         
-        String previousJson = jsonSerializerUtils.toJson(planType);
-        
         InetAddress inetAddress = null;
         try {
         	inetAddress = InetAddress.getByName(request.getRemoteAddr());
@@ -56,8 +54,8 @@ public class PlanTypeCreateUseCase implements PlanTypeCreator{
                 .actionType("CREATED")
                 .entityType("PlanType")
                 .entityId(planType.getId())
-                .previousState(previousJson)
-                .newState("CREATED")
+                .previousState("{}")
+                .newState(jsonSerializerUtils.toJson(planType))
                 .clientIp(inetAddress)
                 .userAgent(request.getHeader("User-Agent"))
                 .build();
@@ -74,6 +72,6 @@ public class PlanTypeCreateUseCase implements PlanTypeCreator{
         planTypeHistoryOutputPort.perform(planTypeHistory);
 		
         
-        return mapper.toResult(outputPort.perform(mapper.toDomain(command)));
+        return mapper.toResult(planType);
 	}
 }

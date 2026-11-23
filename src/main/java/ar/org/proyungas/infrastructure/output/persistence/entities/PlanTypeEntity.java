@@ -39,8 +39,13 @@ public class PlanTypeEntity {
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
-    @Column(name = "codigo", length = 50, nullable = false)
-    private String code;
+    @Column(
+    	    name = "codigo",
+    	    length = 50,
+    	    nullable = false,
+    	    unique = true
+    	)
+    	private String code;
 
     @Column(name = "nombre", length = 200, nullable = false)
     private String name;

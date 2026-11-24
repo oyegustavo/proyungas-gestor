@@ -64,7 +64,7 @@ public class PlanTypeCreateUseCase implements PlanTypeCreator{
         
         PlanTypeHistory planTypeHistory = PlanTypeHistory.builder()
         		.action("CREATED")
-        		.comments(command.getComments())
+        		.comments("created")
         		.planType(planType)
         		.user(user)
         		.build();

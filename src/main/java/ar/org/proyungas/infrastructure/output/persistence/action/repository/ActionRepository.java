@@ -1,6 +1,7 @@
 package ar.org.proyungas.infrastructure.output.persistence.action.repository;
 
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import ar.org.proyungas.domain.models.PlanType;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
 
 @Repository
@@ -29,4 +31,7 @@ public interface ActionRepository extends JpaRepository<ActionEntity, UUID>{
     Page<ActionEntity> findByApplicantOrderByCreatedAtDesc(String applicant, Pageable pageable);
 
     Page<ActionEntity> findAll(Specification<ActionEntity> specification, Pageable pageable);
+    
+    @EntityGraph(attributePaths = { "emailNotifications", "vectorialLayers"})
+    Optional<List<ActionEntity>> findByPlanType(PlanType planType);
 }

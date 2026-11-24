@@ -11,6 +11,7 @@ import ar.org.proyungas.domain.output.action.ActionByPlanTypeOutputPort;
 import ar.org.proyungas.infrastructure.output.persistence.action.create.ActionPersistenceMapper;
 import ar.org.proyungas.infrastructure.output.persistence.action.repository.ActionRepository;
 import ar.org.proyungas.infrastructure.output.persistence.entities.ActionEntity;
+import ar.org.proyungas.infrastructure.output.persistence.plantype.create.PlanTypePersistenceMapper;
 import ar.org.proyungas.shared.infrastructure.input.ActionNotFoundException;
 import ar.org.proyungas.shared.infrastructure.input.DatabaseConnectionException;
 import ar.org.proyungas.shared.infrastructure.input.ErrorCode;
@@ -24,13 +25,14 @@ public class ActionByPlanTypeFinderJpaOutputAdapter implements ActionByPlanTypeO
 
 	private final ActionRepository repository;
 	private final ActionPersistenceMapper mapper;
+	private final PlanTypePersistenceMapper planTypeMapper;
 	
 	@Override
 	public List<Action> perform(PlanType planType) {
 		log.info("Starting ActionByPlanTypeFinderJpaOutputAdapter actionNumber: {}", planType);
 
 		try {
-			List<ActionEntity> actionEntity = repository.findByPlanType(planType)
+			List<ActionEntity> actionEntity = repository.findByPlanType(planTypeMapper.toEntity(planType))
 					.orElseThrow(() -> new ActionNotFoundException(ErrorCode.ACTION_NOT_FOUND));
 
 			return mapper.toDomain(actionEntity);

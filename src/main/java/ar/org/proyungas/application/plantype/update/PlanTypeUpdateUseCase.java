@@ -17,12 +17,14 @@ import ar.org.proyungas.shared.infrastructure.input.InetAddressException;
 import ar.org.proyungas.shared.infrastructure.utils.CurrentUserUtils;
 import ar.org.proyungas.shared.infrastructure.utils.JsonSerializerUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @AllArgsConstructor
 @Slf4j
+@Transactional
 public class PlanTypeUpdateUseCase implements PlanTypeUpdater{
 	
     private final PlanTypeUpdateOutputPort outputPort;

@@ -14,4 +14,5 @@ import lombok.Setter;
 public class PlanTypeUpdateRequest {
     String name;
     Boolean enabled;
+    String comments;
 }
